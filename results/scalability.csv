@@ -1,0 +1,13 @@
+entregas,veiculos,metodo,custo,distancia_km,viavel,tempo_s
+20,5,Vizinho mais próximo,670.9,305.4,False,0.0
+20,5,Clarke-Wright,402.2,232.0,True,0.0
+20,5,OR-Tools (30s),296.5,190.8,True,30.0
+20,5,AG memético,296.5,190.8,True,6.6
+40,5,Vizinho mais próximo,2081.3,529.9,False,0.0
+40,5,Clarke-Wright,1354.8,314.5,False,0.0
+40,5,OR-Tools (30s),3919.3,300.4,False,30.0
+40,5,AG memético,826.3,302.2,False,14.6
+80,8,Vizinho mais próximo,3267.0,732.4,False,0.0
+80,8,Clarke-Wright,3364.7,612.9,False,0.0
+80,8,OR-Tools (30s),1560.0,386.0,False,30.0
+80,8,AG memético,915.0,469.9,True,46.1

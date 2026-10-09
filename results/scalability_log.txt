@@ -1,0 +1,18 @@
+{'entregas': 20, 'veiculos': 5, 'metodo': 'Vizinho mais próximo', 'custo': 670.9, 'distancia_km': 305.4, 'viavel': False, 'tempo_s': 0.0}
+{'entregas': 20, 'veiculos': 5, 'metodo': 'Clarke-Wright', 'custo': 402.2, 'distancia_km': 232.0, 'viavel': True, 'tempo_s': 0.0}
+{'entregas': 20, 'veiculos': 5, 'metodo': 'OR-Tools (30s)', 'custo': 296.5, 'distancia_km': 190.8, 'viavel': True, 'tempo_s': 30.0}
+{'entregas': 20, 'veiculos': 5, 'metodo': 'AG memético', 'custo': 296.5, 'distancia_km': 190.8, 'viavel': True, 'tempo_s': 6.6}
+{'entregas': 40, 'veiculos': 5, 'metodo': 'Vizinho mais próximo', 'custo': 2081.3, 'distancia_km': 529.9, 'viavel': False, 'tempo_s': 0.0}
+{'entregas': 40, 'veiculos': 5, 'metodo': 'Clarke-Wright', 'custo': 1354.8, 'distancia_km': 314.5, 'viavel': False, 'tempo_s': 0.0}
+{'entregas': 40, 'veiculos': 5, 'metodo': 'OR-Tools (30s)', 'custo': 3919.3, 'distancia_km': 300.4, 'viavel': False, 'tempo_s': 30.0}
+{'entregas': 40, 'veiculos': 5, 'metodo': 'AG memético', 'custo': 826.3, 'distancia_km': 302.2, 'viavel': False, 'tempo_s': 14.6}
+{'entregas': 80, 'veiculos': 8, 'metodo': 'Vizinho mais próximo', 'custo': 3267.0, 'distancia_km': 732.4, 'viavel': False, 'tempo_s': 0.0}
+{'entregas': 80, 'veiculos': 8, 'metodo': 'Clarke-Wright', 'custo': 3364.7, 'distancia_km': 612.9, 'viavel': False, 'tempo_s': 0.0}
+{'entregas': 80, 'veiculos': 8, 'metodo': 'OR-Tools (30s)', 'custo': 1560.0, 'distancia_km': 386.0, 'viavel': False, 'tempo_s': 30.0}
+{'entregas': 80, 'veiculos': 8, 'metodo': 'AG memético', 'custo': 915.0, 'distancia_km': 469.9, 'viavel': True, 'tempo_s': 46.1}
+entregas                 20      40      80
+metodo                                     
+AG memético           296.5   826.3   915.0
+Clarke-Wright         402.2  1354.8  3364.7
+OR-Tools (30s)        296.5  3919.3  1560.0
+Vizinho mais próximo  670.9  2081.3  3267.0

@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_6afb01c28069b386374d0268883ed5dc {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    <div style='position:fixed;bottom:24px;left:24px;z-index:9999;background:white;padding:8px 12px;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,.3);font-size:13px;color:#222;line-height:1.5'><b>Código base (TSP, 1 veículo)</b><br><span style='color:red'>●</span> crítica &nbsp;<span style='color:orange'>●</span> urgente &nbsp;<span style='color:green'>●</span> regular<br>Cor da linha = veículo · marcador grande = entrega crítica</div>
+    
+            <div class="folium-map" id="map_6afb01c28069b386374d0268883ed5dc" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_6afb01c28069b386374d0268883ed5dc = L.map(
+                "map_6afb01c28069b386374d0268883ed5dc",
+                {
+                    center: [-23.557, -46.67],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f6fea99f327215b363baea65704f353c = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_f6fea99f327215b363baea65704f353c.addTo(map_6afb01c28069b386374d0268883ed5dc);
+        
+    
+            var marker_bd1764d49bdb432e131ef235894880e0 = L.marker(
+                [-23.557, -46.67],
+                {
+}
+            ).addTo(map_6afb01c28069b386374d0268883ed5dc);
+        
+    
+            var icon_d8c671416b33613fc84d4fe85bb42340 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "white",
+  "icon": "hospital-o",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_bd1764d49bdb432e131ef235894880e0.bindTooltip(
+                `<div>
+                     CD Farmacêutico Central — Hospital Universitário
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_bd1764d49bdb432e131ef235894880e0.setIcon(icon_d8c671416b33613fc84d4fe85bb42340);
+            
+    
+            var feature_group_0c4192ceb8fd3a444b59e41e1ca05297 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var poly_line_ea44538e77015f6b70067ee0b31bdbc3 = L.polyline(
+                [[-23.557, -46.67], [-23.653295, -46.766756], [-23.669976, -46.774581], [-23.645442, -46.711082], [-23.483198, -46.728659], [-23.484999, -46.714858], [-23.591045, -46.634724], [-23.592389, -46.608294], [-23.592012, -46.587677], [-23.640747, -46.634416], [-23.635757, -46.649321], [-23.542373, -46.570118], [-23.529535, -46.582061], [-23.509202, -46.586338], [-23.520204, -46.546076], [-23.606012, -46.487244], [-23.53652, -46.455003], [-23.529444, -46.399934], [-23.489801, -46.438744], [-23.502584, -46.440877], [-23.536537, -46.416893], [-23.583681, -46.565348], [-23.57837, -46.710341], [-23.679437, -46.782706], [-23.677691, -46.781908], [-23.525303, -46.702764], [-23.536036, -46.678144], [-23.518532, -46.662147], [-23.492297, -46.600704], [-23.510161, -46.576639], [-23.524371, -46.543847], [-23.526689, -46.546963], [-23.539538, -46.568109], [-23.506447, -46.582441], [-23.505587, -46.621699], [-23.505739, -46.672039], [-23.502845, -46.699586], [-23.507109, -46.693805], [-23.537717, -46.671559], [-23.538541, -46.679672], [-23.547723, -46.680404], [-23.557, -46.67]],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#9467bd", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+            var circle_marker_880abae60ef7424c7c59a2c69b2ce91f = L.circleMarker(
+                [-23.653295, -46.766756],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_64eb7e7d72041ea7b0c02f0b1f728e32 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_1fd6737e1a4657b6ba7cb6b6825ab95b = $(`<div id="html_1fd6737e1a4657b6ba7cb6b6825ab95b" style="width: 100.0%; height: 100.0%;"><b>1. Paciente domiciliar #19 (Campo Limpo)</b><br>Veículo: Van Carga 3<br>Prioridade: regular · ❄️ refrigerado<br>Carga: 2.5 kg<br>Itens: Vacinas, Seringas e agulhas, Analgésicos<br>Chegada prevista: 08:52<br>Janela: 09:00-12:00</div>`)[0];
+                popup_64eb7e7d72041ea7b0c02f0b1f728e32.setContent(html_1fd6737e1a4657b6ba7cb6b6825ab95b);
+            
+        
+
+        circle_marker_880abae60ef7424c7c59a2c69b2ce91f.bindPopup(popup_64eb7e7d72041ea7b0c02f0b1f728e32)
+        ;
+
+        
+    
+    
+            circle_marker_880abae60ef7424c7c59a2c69b2ce91f.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d3182e12f3a53a6232b2aebf0c8828da = L.circleMarker(
+                [-23.669976, -46.774581],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_907b43144cae104543f4f71bcebf90ee = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_37cbcffbb561ee2df3231755e43c4bcb = $(`<div id="html_37cbcffbb561ee2df3231755e43c4bcb" style="width: 100.0%; height: 100.0%;"><b>2. UBS Capão Redondo 01</b><br>Veículo: Van Carga 3<br>Prioridade: regular<br>Carga: 29.9 kg<br>Itens: Soro fisiológico<br>Chegada prevista: 09:19</div>`)[0];
+                popup_907b43144cae104543f4f71bcebf90ee.setContent(html_37cbcffbb561ee2df3231755e43c4bcb);
+            
+        
+
+        circle_marker_d3182e12f3a53a6232b2aebf0c8828da.bindPopup(popup_907b43144cae104543f4f71bcebf90ee)
+        ;
+
+        
+    
+    
+            circle_marker_d3182e12f3a53a6232b2aebf0c8828da.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ba4064dca35388b6950dc3c06ee00ab8 = L.circleMarker(
+                [-23.645442, -46.711082],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_37a087769645bdda0c9894f363e25652 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_0e7b10b183a0ef8bd9fc937663c6ad52 = $(`<div id="html_0e7b10b183a0ef8bd9fc937663c6ad52" style="width: 100.0%; height: 100.0%;"><b>3. Paciente domiciliar #03 (Santo Amaro)</b><br>Veículo: Van Carga 3<br>Prioridade: regular · ❄️ refrigerado<br>Carga: 4.4 kg<br>Itens: Vacinas, Seringas e agulhas<br>Chegada prevista: 09:54<br>Janela: 10:00-13:00</div>`)[0];
+                popup_37a087769645bdda0c9894f363e25652.setContent(html_0e7b10b183a0ef8bd9fc937663c6ad52);
+            
+        
+
+        circle_marker_ba4064dca35388b6950dc3c06ee00ab8.bindPopup(popup_37a087769645bdda0c9894f363e25652)
+        ;
+
+        
+    
+    
+            circle_marker_ba4064dca35388b6950dc3c06ee00ab8.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 3
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bf10c7c03930fdff302074ca14ea1a1a = L.circleMarker(
+                [-23.483198, -46.728659],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_3f5d3a26da32cfa4a5c70ff9c413cd4d = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_59e2b9748be6e20545af77f2d00a7339 = $(`<div id="html_59e2b9748be6e20545af77f2d00a7339" style="width: 100.0%; height: 100.0%;"><b>4. UBS Pirituba 01</b><br>Veículo: Van Carga 3<br>Prioridade: regular<br>Carga: 14.9 kg<br>Itens: Gaze e curativos, Material de higiene<br>Chegada prevista: 11:16</div>`)[0];
+                popup_3f5d3a26da32cfa4a5c70ff9c413cd4d.setContent(html_59e2b9748be6e20545af77f2d00a7339);
+            
+        
+
+        circle_marker_bf10c7c03930fdff302074ca14ea1a1a.bindPopup(popup_3f5d3a26da32cfa4a5c70ff9c413cd4d)
+        ;
+
+        
+    
+    
+            circle_marker_bf10c7c03930fdff302074ca14ea1a1a.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 4
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e8d5ef67f638cdc8e16e0d5095d53905 = L.circleMarker(
+                [-23.484999, -46.714858],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_f2a9d30d9f6d9e21a1c7877c9ece50f8 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_fdfc8a722218d9c75f7728c0a9fa1d7e = $(`<div id="html_fdfc8a722218d9c75f7728c0a9fa1d7e" style="width: 100.0%; height: 100.0%;"><b>5. Paciente domiciliar #21 (Pirituba)</b><br>Veículo: Van Carga 3<br>Prioridade: regular<br>Carga: 2.3 kg<br>Itens: Seringas e agulhas, Material de higiene<br>Chegada prevista: 11:31<br>Janela: 08:30-11:30</div>`)[0];
+                popup_f2a9d30d9f6d9e21a1c7877c9ece50f8.setContent(html_fdfc8a722218d9c75f7728c0a9fa1d7e);
+            
+        
+
+        circle_marker_e8d5ef67f638cdc8e16e0d5095d53905.bindPopup(popup_f2a9d30d9f6d9e21a1c7877c9ece50f8)
+        ;
+
+        
+    
+    
+            circle_marker_e8d5ef67f638cdc8e16e0d5095d53905.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 5
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e28f4ecf3192ad2b8807a5ade50c1c87 = L.circleMarker(
+                [-23.591045, -46.634724],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_41b84a82f1a53f79dd18161cd9ad665f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c89950ad5ac8d52d2e54144178fde563 = $(`<div id="html_c89950ad5ac8d52d2e54144178fde563" style="width: 100.0%; height: 100.0%;"><b>6. Paciente domiciliar #34 (Vila Mariana)</b><br>Veículo: Van Carga 3<br>Prioridade: regular<br>Carga: 4.2 kg<br>Itens: Analgésicos, Material de higiene<br>Chegada prevista: 12:34<br>Janela: 10:30-12:30</div>`)[0];
+                popup_41b84a82f1a53f79dd18161cd9ad665f.setContent(html_c89950ad5ac8d52d2e54144178fde563);
+            
+        
+
+        circle_marker_e28f4ecf3192ad2b8807a5ade50c1c87.bindPopup(popup_41b84a82f1a53f79dd18161cd9ad665f)
+        ;
+
+        
+    
+    
+            circle_marker_e28f4ecf3192ad2b8807a5ade50c1c87.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 6
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1d2d391242f514acb8cd9c51b39a74f6 = L.circleMarker(
+                [-23.592389, -46.608294],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_cd68059af6b94c8678c210d30d4a375e = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_063c8ed028c425982e3fe08da86997ea = $(`<div id="html_063c8ed028c425982e3fe08da86997ea" style="width: 100.0%; height: 100.0%;"><b>7. UBS Ipiranga 01</b><br>Veículo: Van Carga 3<br>Prioridade: urgente<br>Carga: 42.4 kg<br>Itens: Gaze e curativos, Material de higiene<br>Chegada prevista: 12:56</div>`)[0];
+                popup_cd68059af6b94c8678c210d30d4a375e.setContent(html_063c8ed028c425982e3fe08da86997ea);
+            
+        
+
+        circle_marker_1d2d391242f514acb8cd9c51b39a74f6.bindPopup(popup_cd68059af6b94c8678c210d30d4a375e)
+        ;
+
+        
+    
+    
+            circle_marker_1d2d391242f514acb8cd9c51b39a74f6.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 7
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6c08fb5d4da04e97934dd3751f294c53 = L.circleMarker(
+                [-23.592012, -46.587677],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_9081ec76248df38b1dc3f0c93dd4fd86 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_610a390802f58a11d97e521222d00f86 = $(`<div id="html_610a390802f58a11d97e521222d00f86" style="width: 100.0%; height: 100.0%;"><b>8. UBS Vila Prudente 01</b><br>Veículo: Van Carga 3<br>Prioridade: regular · ❄️ refrigerado<br>Carga: 15.1 kg<br>Itens: Insulina, Luvas e EPIs, Seringas e agulhas<br>Chegada prevista: 13:13</div>`)[0];
+                popup_9081ec76248df38b1dc3f0c93dd4fd86.setContent(html_610a390802f58a11d97e521222d00f86);
+            
+        
+
+        circle_marker_6c08fb5d4da04e97934dd3751f294c53.bindPopup(popup_9081ec76248df38b1dc3f0c93dd4fd86)
+        ;
+
+        
+    
+    
+            circle_marker_6c08fb5d4da04e97934dd3751f294c53.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 8
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d2ab8224dd6319c9da0181ddec52ee95 = L.circleMarker(
+                [-23.640747, -46.634416],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_cb65daf3d81e24a0d96149e6bd28ed40 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_7cbbc908c00b2ca5f4add06481638d54 = $(`<div id="html_7cbbc908c00b2ca5f4add06481638d54" style="width: 100.0%; height: 100.0%;"><b>9. Paciente domiciliar #01 (Jabaquara)</b><br>Veículo: Van Carga 3<br>Prioridade: crítica<br>Carga: 2.9 kg<br>Itens: Quimioterápicos, Soro fisiológico, Analgésicos<br>Chegada prevista: 13:49<br>Janela: 11:00-14:00</div>`)[0];
+                popup_cb65daf3d81e24a0d96149e6bd28ed40.setContent(html_7cbbc908c00b2ca5f4add06481638d54);
+            
+        
+
+        circle_marker_d2ab8224dd6319c9da0181ddec52ee95.bindPopup(popup_cb65daf3d81e24a0d96149e6bd28ed40)
+        ;
+
+        
+    
+    
+            circle_marker_d2ab8224dd6319c9da0181ddec52ee95.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 9
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_414a3a839235c3ec067e69125b3713db = L.circleMarker(
+                [-23.635757, -46.649321],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_22f98a662d94990abe8b09a042449ebf = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_fbb4d06645de05c3d45f27cfbfa593d0 = $(`<div id="html_fbb4d06645de05c3d45f27cfbfa593d0" style="width: 100.0%; height: 100.0%;"><b>10. UBS Jabaquara 01</b><br>Veículo: Van Carga 3<br>Prioridade: crítica<br>Carga: 30.7 kg<br>Itens: Antibióticos de amplo espectro, Material de higiene, Seringas e agulhas<br>Chegada prevista: 14:06</div>`)[0];
+                popup_22f98a662d94990abe8b09a042449ebf.setContent(html_fbb4d06645de05c3d45f27cfbfa593d0);
+            
+        
+
+        circle_marker_414a3a839235c3ec067e69125b3713db.bindPopup(popup_22f98a662d94990abe8b09a042449ebf)
+        ;
+
+        
+    
+    
+            circle_marker_414a3a839235c3ec067e69125b3713db.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 10
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0f678b36c200369b5d210c7ee0ecda16 = L.circleMarker(
+                [-23.542373, -46.570118],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_c1dcd96c8a3d59f32c628da836a425c9 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_6c0f9be22295e2aad1cd258e648423c8 = $(`<div id="html_6c0f9be22295e2aad1cd258e648423c8" style="width: 100.0%; height: 100.0%;"><b>11. Hospital Dia Tatuapé 01</b><br>Veículo: Van Carga 3<br>Prioridade: urgente<br>Carga: 100.0 kg<br>Itens: Soro fisiológico, Seringas e agulhas<br>Chegada prevista: 15:03</div>`)[0];
+                popup_c1dcd96c8a3d59f32c628da836a425c9.setContent(html_6c0f9be22295e2aad1cd258e648423c8);
+            
+        
+
+        circle_marker_0f678b36c200369b5d210c7ee0ecda16.bindPopup(popup_c1dcd96c8a3d59f32c628da836a425c9)
+        ;
+
+        
+    
+    
+            circle_marker_0f678b36c200369b5d210c7ee0ecda16.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 11
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fc230bc9a1445a8d4e430ab6fb94a02c = L.circleMarker(
+                [-23.529535, -46.582061],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_8bf99cdf0f65d501336d809b7be992ad = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_63eca35b134054099eaac67ca31497d9 = $(`<div id="html_63eca35b134054099eaac67ca31497d9" style="width: 100.0%; height: 100.0%;"><b>12. UBS Tatuapé 01</b><br>Veículo: Van Carga 3<br>Prioridade: urgente<br>Carga: 32.2 kg<br>Itens: Analgésicos<br>Chegada prevista: 15:25</div>`)[0];
+                popup_8bf99cdf0f65d501336d809b7be992ad.setContent(html_63eca35b134054099eaac67ca31497d9);
+            
+        
+
+        circle_marker_fc230bc9a1445a8d4e430ab6fb94a02c.bindPopup(popup_8bf99cdf0f65d501336d809b7be992ad)
+        ;
+
+        
+    
+    
+            circle_marker_fc230bc9a1445a8d4e430ab6fb94a02c.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 12
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9b4a47e5ce68395bea4cbc0327ec5ced = L.circleMarker(
+                [-23.509202, -46.586338],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_0209410e9f0beee871322c0f5fc0d3bc = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_3bdaf04b7a1896da18e6c44a33c2de08 = $(`<div id="html_3bdaf04b7a1896da18e6c44a33c2de08" style="width: 100.0%; height: 100.0%;"><b>13. Paciente domiciliar #12 (Vila Maria)</b><br>Veículo: Van Carga 3<br>Prioridade: urgente<br>Carga: 2.4 kg<br>Itens: Analgésicos<br>Chegada prevista: 15:43<br>Janela: 09:30-12:30</div>`)[0];
+                popup_0209410e9f0beee871322c0f5fc0d3bc.setContent(html_3bdaf04b7a1896da18e6c44a33c2de08);
+            
+        
+
+        circle_marker_9b4a47e5ce68395bea4cbc0327ec5ced.bindPopup(popup_0209410e9f0beee871322c0f5fc0d3bc)
+        ;
+
+        
+    
+    
+            circle_marker_9b4a47e5ce68395bea4cbc0327ec5ced.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 13
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5e8952bd134d9bda1965a6611ad20b4e = L.circleMarker(
+                [-23.520204, -46.546076],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_d4008fe34c94424dbe0b625ef9a0ea47 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_3fdb954b36cb753f20f3c038f19daf29 = $(`<div id="html_3fdb954b36cb753f20f3c038f19daf29" style="width: 100.0%; height: 100.0%;"><b>14. Paciente domiciliar #37 (Penha)</b><br>Veículo: Van Carga 3<br>Prioridade: regular · ❄️ refrigerado<br>Carga: 4.5 kg<br>Itens: Imunobiológicos<br>Chegada prevista: 16:10<br>Janela: 12:00-14:00</div>`)[0];
+                popup_d4008fe34c94424dbe0b625ef9a0ea47.setContent(html_3fdb954b36cb753f20f3c038f19daf29);
+            
+        
+
+        circle_marker_5e8952bd134d9bda1965a6611ad20b4e.bindPopup(popup_d4008fe34c94424dbe0b625ef9a0ea47)
+        ;
+
+        
+    
+    
+            circle_marker_5e8952bd134d9bda1965a6611ad20b4e.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 14
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_352fed4d33454f8a0b93c0fb57b98180 = L.circleMarker(
+                [-23.606012, -46.487244],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_6368873455638923254f719ac3e79f28 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_50078a964536e4a38408af21e7d5885a = $(`<div id="html_50078a964536e4a38408af21e7d5885a" style="width: 100.0%; height: 100.0%;"><b>15. Paciente domiciliar #27 (São Mateus)</b><br>Veículo: Van Carga 3<br>Prioridade: regular · ❄️ refrigerado<br>Carga: 2.2 kg<br>Itens: Imunobiológicos<br>Chegada prevista: 17:02<br>Janela: 09:30-11:30</div>`)[0];
+                popup_6368873455638923254f719ac3e79f28.setContent(html_50078a964536e4a38408af21e7d5885a);
+            
+        
+
+        circle_marker_352fed4d33454f8a0b93c0fb57b98180.bindPopup(popup_6368873455638923254f719ac3e79f28)
+        ;
+
+        
+    
+    
+            circle_marker_352fed4d33454f8a0b93c0fb57b98180.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 15
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_33408356998628eb38890af5e3375d96 = L.circleMarker(
+                [-23.53652, -46.455003],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_ddd80cf1743b0ca48487cd92f90da987 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_eb350ac8c62a51bc1014a122c674279d = $(`<div id="html_eb350ac8c62a51bc1014a122c674279d" style="width: 100.0%; height: 100.0%;"><b>16. Hospital Dia Itaquera 01</b><br>Veículo: Van Carga 3<br>Prioridade: regular<br>Carga: 68.4 kg<br>Itens: Soro fisiológico, Material de higiene<br>Chegada prevista: 17:44</div>`)[0];
+                popup_ddd80cf1743b0ca48487cd92f90da987.setContent(html_eb350ac8c62a51bc1014a122c674279d);
+            
+        
+
+        circle_marker_33408356998628eb38890af5e3375d96.bindPopup(popup_ddd80cf1743b0ca48487cd92f90da987)
+        ;
+
+        
+    
+    
+            circle_marker_33408356998628eb38890af5e3375d96.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 16
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_210e7d40b7dbf8b410262f37bd89fbaf = L.circleMarker(
+                [-23.529444, -46.399934],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_37cbe573b0435093c740986ef49c2361 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_08c7b33feef0e4d7ca7ef7fd51f31239 = $(`<div id="html_08c7b33feef0e4d7ca7ef7fd51f31239" style="width: 100.0%; height: 100.0%;"><b>17. Paciente domiciliar #22 (Guaianases)</b><br>Veículo: Van Carga 3<br>Prioridade: crítica · ❄️ refrigerado<br>Carga: 2.6 kg<br>Itens: Insulina, Anticoagulantes, Analgésicos<br>Chegada prevista: 18:19<br>Janela: 13:00-15:00</div>`)[0];
+                popup_37cbe573b0435093c740986ef49c2361.setContent(html_08c7b33feef0e4d7ca7ef7fd51f31239);
+            
+        
+
+        circle_marker_210e7d40b7dbf8b410262f37bd89fbaf.bindPopup(popup_37cbe573b0435093c740986ef49c2361)
+        ;
+
+        
+    
+    
+            circle_marker_210e7d40b7dbf8b410262f37bd89fbaf.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 17
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_918b889260f319b93b33e8548eb2326a = L.circleMarker(
+                [-23.489801, -46.438744],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_3c80094a93636b2178c838865c51f58b = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_6b8501c46c38aca0a5bd75521d1a299d = $(`<div id="html_6b8501c46c38aca0a5bd75521d1a299d" style="width: 100.0%; height: 100.0%;"><b>18. Paciente domiciliar #38 (São Miguel Paulista)</b><br>Veículo: Van Carga 3<br>Prioridade: regular · ❄️ refrigerado<br>Carga: 5.0 kg<br>Itens: Insulina, Material de higiene<br>Chegada prevista: 18:52<br>Janela: 12:00-15:00</div>`)[0];
+                popup_3c80094a93636b2178c838865c51f58b.setContent(html_6b8501c46c38aca0a5bd75521d1a299d);
+            
+        
+
+        circle_marker_918b889260f319b93b33e8548eb2326a.bindPopup(popup_3c80094a93636b2178c838865c51f58b)
+        ;
+
+        
+    
+    
+            circle_marker_918b889260f319b93b33e8548eb2326a.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 18
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cb22ba9a5a9a814802d8477602feb6f4 = L.circleMarker(
+                [-23.502584, -46.440877],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_12e48912ac60d847444ca891a7e26330 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_cc0dbd24e5602808a524d9b24aa44fb2 = $(`<div id="html_cc0dbd24e5602808a524d9b24aa44fb2" style="width: 100.0%; height: 100.0%;"><b>19. Clínica de Especialidades São Miguel Paulista 01</b><br>Veículo: Van Carga 3<br>Prioridade: crítica<br>Carga: 20.0 kg<br>Itens: Anticoagulantes, Analgésicos, Luvas e EPIs<br>Chegada prevista: 19:09</div>`)[0];
+                popup_12e48912ac60d847444ca891a7e26330.setContent(html_cc0dbd24e5602808a524d9b24aa44fb2);
+            
+        
+
+        circle_marker_cb22ba9a5a9a814802d8477602feb6f4.bindPopup(popup_12e48912ac60d847444ca891a7e26330)
+        ;
+
+        
+    
+    
+            circle_marker_cb22ba9a5a9a814802d8477602feb6f4.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 19
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_51cc5a9d64b4edadfb7f9b3f6469d842 = L.circleMarker(
+                [-23.536537, -46.416893],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_fa4d9e61b1727fcee353934b68feaa5c = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_217693814eaa4c29ff3d5a91e2fb2036 = $(`<div id="html_217693814eaa4c29ff3d5a91e2fb2036" style="width: 100.0%; height: 100.0%;"><b>20. Clínica de Especialidades Guaianases 01</b><br>Veículo: Van Carga 3<br>Prioridade: regular<br>Carga: 17.3 kg<br>Itens: Luvas e EPIs, Seringas e agulhas<br>Chegada prevista: 19:33</div>`)[0];
+                popup_fa4d9e61b1727fcee353934b68feaa5c.setContent(html_217693814eaa4c29ff3d5a91e2fb2036);
+            
+        
+
+        circle_marker_51cc5a9d64b4edadfb7f9b3f6469d842.bindPopup(popup_fa4d9e61b1727fcee353934b68feaa5c)
+        ;
+
+        
+    
+    
+            circle_marker_51cc5a9d64b4edadfb7f9b3f6469d842.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 20
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_60c2d22e739a5a57867a7d4808c705e6 = L.circleMarker(
+                [-23.583681, -46.565348],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_c668199aaea3852d5d19e1f51a4bf532 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_844dc68c231ea4b27ab8d3d2df9baddd = $(`<div id="html_844dc68c231ea4b27ab8d3d2df9baddd" style="width: 100.0%; height: 100.0%;"><b>21. Paciente domiciliar #32 (Vila Prudente)</b><br>Veículo: Van Carga 3<br>Prioridade: regular · ❄️ refrigerado<br>Carga: 3.6 kg<br>Itens: Insulina<br>Chegada prevista: 20:38<br>Janela: 08:00-10:00</div>`)[0];
+                popup_c668199aaea3852d5d19e1f51a4bf532.setContent(html_844dc68c231ea4b27ab8d3d2df9baddd);
+            
+        
+
+        circle_marker_60c2d22e739a5a57867a7d4808c705e6.bindPopup(popup_c668199aaea3852d5d19e1f51a4bf532)
+        ;
+
+        
+    
+    
+            circle_marker_60c2d22e739a5a57867a7d4808c705e6.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 21
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b69dec271f4ae6b415834d8e6b5e0e7a = L.circleMarker(
+                [-23.57837, -46.710341],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_c2946f47839857f9e241ea6f9ff2fcb8 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b59a7a22639e19a21116fd520f4e76a7 = $(`<div id="html_b59a7a22639e19a21116fd520f4e76a7" style="width: 100.0%; height: 100.0%;"><b>22. UBS Butantã 01</b><br>Veículo: Van Carga 3<br>Prioridade: regular<br>Carga: 28.7 kg<br>Itens: Analgésicos, Seringas e agulhas<br>Chegada prevista: 21:42</div>`)[0];
+                popup_c2946f47839857f9e241ea6f9ff2fcb8.setContent(html_b59a7a22639e19a21116fd520f4e76a7);
+            
+        
+
+        circle_marker_b69dec271f4ae6b415834d8e6b5e0e7a.bindPopup(popup_c2946f47839857f9e241ea6f9ff2fcb8)
+        ;
+
+        
+    
+    
+            circle_marker_b69dec271f4ae6b415834d8e6b5e0e7a.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 22
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_84a0b3082ade0e592a72a4e5dc3b3512 = L.circleMarker(
+                [-23.679437, -46.782706],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_6172759735b0d67f293ceb13f351d342 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_d5b2a5bcab2fef344d9432a0dc8b71a4 = $(`<div id="html_d5b2a5bcab2fef344d9432a0dc8b71a4" style="width: 100.0%; height: 100.0%;"><b>23. Clínica de Especialidades Capão Redondo 01</b><br>Veículo: Van Carga 3<br>Prioridade: urgente<br>Carga: 22.3 kg<br>Itens: Soro fisiológico<br>Chegada prevista: 22:40</div>`)[0];
+                popup_6172759735b0d67f293ceb13f351d342.setContent(html_d5b2a5bcab2fef344d9432a0dc8b71a4);
+            
+        
+
+        circle_marker_84a0b3082ade0e592a72a4e5dc3b3512.bindPopup(popup_6172759735b0d67f293ceb13f351d342)
+        ;
+
+        
+    
+    
+            circle_marker_84a0b3082ade0e592a72a4e5dc3b3512.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 23
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_335264f548bf6bfd05cd292af45d4784 = L.circleMarker(
+                [-23.677691, -46.781908],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_644612c1bd31e95bd44d9c9d01cda6f9 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_fd57dabe3b4248b7fc52064c0db98582 = $(`<div id="html_fd57dabe3b4248b7fc52064c0db98582" style="width: 100.0%; height: 100.0%;"><b>24. UBS Capão Redondo 02</b><br>Veículo: Van Carga 3<br>Prioridade: urgente · ❄️ refrigerado<br>Carga: 41.4 kg<br>Itens: Vacinas, Analgésicos<br>Chegada prevista: 22:49</div>`)[0];
+                popup_644612c1bd31e95bd44d9c9d01cda6f9.setContent(html_fd57dabe3b4248b7fc52064c0db98582);
+            
+        
+
+        circle_marker_335264f548bf6bfd05cd292af45d4784.bindPopup(popup_644612c1bd31e95bd44d9c9d01cda6f9)
+        ;
+
+        
+    
+    
+            circle_marker_335264f548bf6bfd05cd292af45d4784.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 24
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_020cd021ec7e854fb0cf9790f003c16b = L.circleMarker(
+                [-23.525303, -46.702764],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_a6c47044dd693b628271462ae125b729 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f65a2b7f0998adb260d8fe2f2b837608 = $(`<div id="html_f65a2b7f0998adb260d8fe2f2b837608" style="width: 100.0%; height: 100.0%;"><b>25. Hospital Dia Lapa 01</b><br>Veículo: Van Carga 3<br>Prioridade: crítica · ❄️ refrigerado<br>Carga: 81.7 kg<br>Itens: Imunobiológicos, Quimioterápicos<br>Chegada prevista: 24:05</div>`)[0];
+                popup_a6c47044dd693b628271462ae125b729.setContent(html_f65a2b7f0998adb260d8fe2f2b837608);
+            
+        
+
+        circle_marker_020cd021ec7e854fb0cf9790f003c16b.bindPopup(popup_a6c47044dd693b628271462ae125b729)
+        ;
+
+        
+    
+    
+            circle_marker_020cd021ec7e854fb0cf9790f003c16b.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 25
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7752c926938efcece202b39b4ece6f0a = L.circleMarker(
+                [-23.536036, -46.678144],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_ad4a9aeb1fd0b0d51e2659234a489501 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_162ea6d4acce254405eb169690c40c5b = $(`<div id="html_162ea6d4acce254405eb169690c40c5b" style="width: 100.0%; height: 100.0%;"><b>26. Paciente domiciliar #23 (Perdizes)</b><br>Veículo: Van Carga 3<br>Prioridade: crítica · ❄️ refrigerado<br>Carga: 3.5 kg<br>Itens: Hemoderivados, Anticoagulantes<br>Chegada prevista: 24:30<br>Janela: 08:30-11:30</div>`)[0];
+                popup_ad4a9aeb1fd0b0d51e2659234a489501.setContent(html_162ea6d4acce254405eb169690c40c5b);
+            
+        
+
+        circle_marker_7752c926938efcece202b39b4ece6f0a.bindPopup(popup_ad4a9aeb1fd0b0d51e2659234a489501)
+        ;
+
+        
+    
+    
+            circle_marker_7752c926938efcece202b39b4ece6f0a.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 26
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8ee3068af87450906e0465e7d2d0efca = L.circleMarker(
+                [-23.518532, -46.662147],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_112f771aed69a5f4ecc25b5532a91bc4 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_441f1ce386398689ae9396232c3fd878 = $(`<div id="html_441f1ce386398689ae9396232c3fd878" style="width: 100.0%; height: 100.0%;"><b>27. Clínica de Especialidades Casa Verde 01</b><br>Veículo: Van Carga 3<br>Prioridade: regular<br>Carga: 7.6 kg<br>Itens: Analgésicos<br>Chegada prevista: 24:51</div>`)[0];
+                popup_112f771aed69a5f4ecc25b5532a91bc4.setContent(html_441f1ce386398689ae9396232c3fd878);
+            
+        
+
+        circle_marker_8ee3068af87450906e0465e7d2d0efca.bindPopup(popup_112f771aed69a5f4ecc25b5532a91bc4)
+        ;
+
+        
+    
+    
+            circle_marker_8ee3068af87450906e0465e7d2d0efca.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 27
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1d3db3f6de12ea75108a3fb830e46d89 = L.circleMarker(
+                [-23.492297, -46.600704],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_7c2fbff7d5de96831074609c7f651613 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_d62a75bf7d4db70968ab52c954a8edaa = $(`<div id="html_d62a75bf7d4db70968ab52c954a8edaa" style="width: 100.0%; height: 100.0%;"><b>28. UBS Tucuruvi 01</b><br>Veículo: Van Carga 3<br>Prioridade: urgente<br>Carga: 21.5 kg<br>Itens: Soro fisiológico<br>Chegada prevista: 25:24</div>`)[0];
+                popup_7c2fbff7d5de96831074609c7f651613.setContent(html_d62a75bf7d4db70968ab52c954a8edaa);
+            
+        
+
+        circle_marker_1d3db3f6de12ea75108a3fb830e46d89.bindPopup(popup_7c2fbff7d5de96831074609c7f651613)
+        ;
+
+        
+    
+    
+            circle_marker_1d3db3f6de12ea75108a3fb830e46d89.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 28
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_134daa9e93eacd13e5506c969b53533b = L.circleMarker(
+                [-23.510161, -46.576639],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_9f23c4025c2f188cf1b0d30e5b719014 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f8e8946a3279e4bc8849d987e800eb0c = $(`<div id="html_f8e8946a3279e4bc8849d987e800eb0c" style="width: 100.0%; height: 100.0%;"><b>29. UBS Vila Maria 01</b><br>Veículo: Van Carga 3<br>Prioridade: crítica<br>Carga: 38.1 kg<br>Itens: Drogas vasoativas, Analgésicos, Gaze e curativos<br>Chegada prevista: 25:45</div>`)[0];
+                popup_9f23c4025c2f188cf1b0d30e5b719014.setContent(html_f8e8946a3279e4bc8849d987e800eb0c);
+            
+        
+
+        circle_marker_134daa9e93eacd13e5506c969b53533b.bindPopup(popup_9f23c4025c2f188cf1b0d30e5b719014)
+        ;
+
+        
+    
+    
+            circle_marker_134daa9e93eacd13e5506c969b53533b.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 29
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c64e8b581f9e259c65c096907e58e0c1 = L.circleMarker(
+                [-23.524371, -46.543847],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_156b3106f44ea13f991bf527e28ea693 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_632cf323a0633b1aa9b9e2eda1702301 = $(`<div id="html_632cf323a0633b1aa9b9e2eda1702301" style="width: 100.0%; height: 100.0%;"><b>30. Paciente domiciliar #14 (Penha)</b><br>Veículo: Van Carga 3<br>Prioridade: regular<br>Carga: 3.5 kg<br>Itens: Soro fisiológico, Luvas e EPIs<br>Chegada prevista: 26:08<br>Janela: 10:30-12:30</div>`)[0];
+                popup_156b3106f44ea13f991bf527e28ea693.setContent(html_632cf323a0633b1aa9b9e2eda1702301);
+            
+        
+
+        circle_marker_c64e8b581f9e259c65c096907e58e0c1.bindPopup(popup_156b3106f44ea13f991bf527e28ea693)
+        ;
+
+        
+    
+    
+            circle_marker_c64e8b581f9e259c65c096907e58e0c1.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 30
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_89afcad134057bc8404f3309682fc7d1 = L.circleMarker(
+                [-23.526689, -46.546963],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_d4b3f6ff7408f50aec61ef05b7196163 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_1977689eb3fb1df58d00ad6226752b60 = $(`<div id="html_1977689eb3fb1df58d00ad6226752b60" style="width: 100.0%; height: 100.0%;"><b>31. Clínica de Especialidades Penha 01</b><br>Veículo: Van Carga 3<br>Prioridade: regular<br>Carga: 7.4 kg<br>Itens: Material de higiene<br>Chegada prevista: 26:21</div>`)[0];
+                popup_d4b3f6ff7408f50aec61ef05b7196163.setContent(html_1977689eb3fb1df58d00ad6226752b60);
+            
+        
+
+        circle_marker_89afcad134057bc8404f3309682fc7d1.bindPopup(popup_d4b3f6ff7408f50aec61ef05b7196163)
+        ;
+
+        
+    
+    
+            circle_marker_89afcad134057bc8404f3309682fc7d1.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 31
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5c61aebf69b3dfea9b6d39aac50947c6 = L.circleMarker(
+                [-23.539538, -46.568109],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_7ba5f278803ab13664a085ac6bb897f4 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_a3ba4055c1d934b8629b6a804f1bd1ef = $(`<div id="html_a3ba4055c1d934b8629b6a804f1bd1ef" style="width: 100.0%; height: 100.0%;"><b>32. Paciente domiciliar #02 (Tatuapé)</b><br>Veículo: Van Carga 3<br>Prioridade: urgente · ❄️ refrigerado<br>Carga: 4.2 kg<br>Itens: Insulina, Material de higiene<br>Chegada prevista: 26:38<br>Janela: 08:30-11:30</div>`)[0];
+                popup_7ba5f278803ab13664a085ac6bb897f4.setContent(html_a3ba4055c1d934b8629b6a804f1bd1ef);
+            
+        
+
+        circle_marker_5c61aebf69b3dfea9b6d39aac50947c6.bindPopup(popup_7ba5f278803ab13664a085ac6bb897f4)
+        ;
+
+        
+    
+    
+            circle_marker_5c61aebf69b3dfea9b6d39aac50947c6.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 32
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_011f2bc9a4628a5f33ee82eb0975f541 = L.circleMarker(
+                [-23.506447, -46.582441],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_eab7ebc0f4fc641d7c3af25f6ee80f96 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_fc21933b5dce0a7f55bb0b64233e9ca6 = $(`<div id="html_fc21933b5dce0a7f55bb0b64233e9ca6" style="width: 100.0%; height: 100.0%;"><b>33. Clínica de Especialidades Vila Maria 01</b><br>Veículo: Van Carga 3<br>Prioridade: urgente<br>Carga: 9.7 kg<br>Itens: Gaze e curativos, Seringas e agulhas<br>Chegada prevista: 27:04</div>`)[0];
+                popup_eab7ebc0f4fc641d7c3af25f6ee80f96.setContent(html_fc21933b5dce0a7f55bb0b64233e9ca6);
+            
+        
+
+        circle_marker_011f2bc9a4628a5f33ee82eb0975f541.bindPopup(popup_eab7ebc0f4fc641d7c3af25f6ee80f96)
+        ;
+
+        
+    
+    
+            circle_marker_011f2bc9a4628a5f33ee82eb0975f541.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 33
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dff3488fc7afc77772f824819c92c0cb = L.circleMarker(
+                [-23.505587, -46.621699],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_bdb465431db7575e658c2c4c43a54d1a = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_977738f8cf4d756edbe65fda47da02b8 = $(`<div id="html_977738f8cf4d756edbe65fda47da02b8" style="width: 100.0%; height: 100.0%;"><b>34. UBS Santana 01</b><br>Veículo: Van Carga 3<br>Prioridade: regular<br>Carga: 40.6 kg<br>Itens: Gaze e curativos, Material de higiene<br>Chegada prevista: 27:27</div>`)[0];
+                popup_bdb465431db7575e658c2c4c43a54d1a.setContent(html_977738f8cf4d756edbe65fda47da02b8);
+            
+        
+
+        circle_marker_dff3488fc7afc77772f824819c92c0cb.bindPopup(popup_bdb465431db7575e658c2c4c43a54d1a)
+        ;
+
+        
+    
+    
+            circle_marker_dff3488fc7afc77772f824819c92c0cb.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 34
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8e34b6d5e186aa4209ffa8ad0c2101fa = L.circleMarker(
+                [-23.505739, -46.672039],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_a527f8ce0fbd196bd71c51f70e413c15 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_47f2c6b2c1534e51da1ae12ff5a8fafb = $(`<div id="html_47f2c6b2c1534e51da1ae12ff5a8fafb" style="width: 100.0%; height: 100.0%;"><b>35. UBS Casa Verde 01</b><br>Veículo: Van Carga 3<br>Prioridade: regular<br>Carga: 31.0 kg<br>Itens: Analgésicos, Material de higiene<br>Chegada prevista: 27:55</div>`)[0];
+                popup_a527f8ce0fbd196bd71c51f70e413c15.setContent(html_47f2c6b2c1534e51da1ae12ff5a8fafb);
+            
+        
+
+        circle_marker_8e34b6d5e186aa4209ffa8ad0c2101fa.bindPopup(popup_a527f8ce0fbd196bd71c51f70e413c15)
+        ;
+
+        
+    
+    
+            circle_marker_8e34b6d5e186aa4209ffa8ad0c2101fa.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 35
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_10915f474e540a47bf83a3b693a89457 = L.circleMarker(
+                [-23.502845, -46.699586],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_9f8669fbdbdd7b0ded2b1f1150118e03 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_441dba64ba32c82e165f8c2fbbdee7ea = $(`<div id="html_441dba64ba32c82e165f8c2fbbdee7ea" style="width: 100.0%; height: 100.0%;"><b>36. Paciente domiciliar #04 (Freguesia do Ó)</b><br>Veículo: Van Carga 3<br>Prioridade: urgente<br>Carga: 4.3 kg<br>Itens: Seringas e agulhas, Luvas e EPIs<br>Chegada prevista: 28:15<br>Janela: 12:00-14:00</div>`)[0];
+                popup_9f8669fbdbdd7b0ded2b1f1150118e03.setContent(html_441dba64ba32c82e165f8c2fbbdee7ea);
+            
+        
+
+        circle_marker_10915f474e540a47bf83a3b693a89457.bindPopup(popup_9f8669fbdbdd7b0ded2b1f1150118e03)
+        ;
+
+        
+    
+    
+            circle_marker_10915f474e540a47bf83a3b693a89457.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 36
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5a425f0ce3808f38974dfa77ab89844b = L.circleMarker(
+                [-23.507109, -46.693805],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_29b3f856359e31ae7ebc4ba833dc6084 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_e006ff34863f422011450c656a3ebd35 = $(`<div id="html_e006ff34863f422011450c656a3ebd35" style="width: 100.0%; height: 100.0%;"><b>37. Hospital Dia Freguesia do Ó 01</b><br>Veículo: Van Carga 3<br>Prioridade: crítica<br>Carga: 80.0 kg<br>Itens: Drogas vasoativas, Seringas e agulhas, Material de higiene<br>Chegada prevista: 28:30</div>`)[0];
+                popup_29b3f856359e31ae7ebc4ba833dc6084.setContent(html_e006ff34863f422011450c656a3ebd35);
+            
+        
+
+        circle_marker_5a425f0ce3808f38974dfa77ab89844b.bindPopup(popup_29b3f856359e31ae7ebc4ba833dc6084)
+        ;
+
+        
+    
+    
+            circle_marker_5a425f0ce3808f38974dfa77ab89844b.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 37
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_539cd39eaf3962e4bb99bc4ef3bd4393 = L.circleMarker(
+                [-23.537717, -46.671559],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_732d94cd5205b4593ff7866b1d01bdb6 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_3e4b28afb9294066b522a46860213a22 = $(`<div id="html_3e4b28afb9294066b522a46860213a22" style="width: 100.0%; height: 100.0%;"><b>38. Paciente domiciliar #30 (Perdizes)</b><br>Veículo: Van Carga 3<br>Prioridade: crítica · ❄️ refrigerado<br>Carga: 1.3 kg<br>Itens: Vacinas, Quimioterápicos<br>Chegada prevista: 28:59<br>Janela: 10:00-13:00</div>`)[0];
+                popup_732d94cd5205b4593ff7866b1d01bdb6.setContent(html_3e4b28afb9294066b522a46860213a22);
+            
+        
+
+        circle_marker_539cd39eaf3962e4bb99bc4ef3bd4393.bindPopup(popup_732d94cd5205b4593ff7866b1d01bdb6)
+        ;
+
+        
+    
+    
+            circle_marker_539cd39eaf3962e4bb99bc4ef3bd4393.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 38
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_105ed406b1f2c0b91eecd4ef4d57fcee = L.circleMarker(
+                [-23.538541, -46.679672],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_4974c243bfeb8028fae74499e4c26d74 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_bc1c2c1856091b312faa9f84c3ceda2b = $(`<div id="html_bc1c2c1856091b312faa9f84c3ceda2b" style="width: 100.0%; height: 100.0%;"><b>39. Paciente domiciliar #10 (Perdizes)</b><br>Veículo: Van Carga 3<br>Prioridade: regular<br>Carga: 1.8 kg<br>Itens: Analgésicos<br>Chegada prevista: 29:14<br>Janela: 08:30-11:30</div>`)[0];
+                popup_4974c243bfeb8028fae74499e4c26d74.setContent(html_bc1c2c1856091b312faa9f84c3ceda2b);
+            
+        
+
+        circle_marker_105ed406b1f2c0b91eecd4ef4d57fcee.bindPopup(popup_4974c243bfeb8028fae74499e4c26d74)
+        ;
+
+        
+    
+    
+            circle_marker_105ed406b1f2c0b91eecd4ef4d57fcee.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 39
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3396867e9f16be26f8de83ef958266d5 = L.circleMarker(
+                [-23.547723, -46.680404],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 3}
+            ).addTo(feature_group_0c4192ceb8fd3a444b59e41e1ca05297);
+        
+    
+        var popup_8318faa6db117a6504bae07c26dbe537 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_1e9e92005371ab7ace5c43b96d824854 = $(`<div id="html_1e9e92005371ab7ace5c43b96d824854" style="width: 100.0%; height: 100.0%;"><b>40. UBS Perdizes 01</b><br>Veículo: Van Carga 3<br>Prioridade: urgente<br>Carga: 13.8 kg<br>Itens: Soro fisiológico, Analgésicos<br>Chegada prevista: 29:30</div>`)[0];
+                popup_8318faa6db117a6504bae07c26dbe537.setContent(html_1e9e92005371ab7ace5c43b96d824854);
+            
+        
+
+        circle_marker_3396867e9f16be26f8de83ef958266d5.bindPopup(popup_8318faa6db117a6504bae07c26dbe537)
+        ;
+
+        
+    
+    
+            circle_marker_3396867e9f16be26f8de83ef958266d5.bindTooltip(
+                `<div>
+                     Van Carga 3 · parada 40
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_0c4192ceb8fd3a444b59e41e1ca05297.addTo(map_6afb01c28069b386374d0268883ed5dc);
+        
+    
+            var layer_control_2ad2f42d6ae743dc68538f54f57914cb_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_f6fea99f327215b363baea65704f353c,
+                },
+                overlays :  {
+                    "Van Carga 3 \u2014 311.13 km, 40 paradas" : feature_group_0c4192ceb8fd3a444b59e41e1ca05297,
+                },
+            };
+            let layer_control_2ad2f42d6ae743dc68538f54f57914cb = L.control.layers(
+                layer_control_2ad2f42d6ae743dc68538f54f57914cb_layers.base_layers,
+                layer_control_2ad2f42d6ae743dc68538f54f57914cb_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_6afb01c28069b386374d0268883ed5dc);
+
+        
+    
+            map_6afb01c28069b386374d0268883ed5dc.fitBounds(
+                [[-23.679437, -46.782706], [-23.483198, -46.399934]],
+                {"padding": [20, 20]}
+            );
+        
+</script>
+</html>

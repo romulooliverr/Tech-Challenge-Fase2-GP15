@@ -1,0 +1,21 @@
+WARNING rotas.llm.provider: Cota diária esgotada para gemini-3.5-flash — tentando o próximo modelo
+Van Refrigerada 1    v0: geral=0.833
+Van Refrigerada 1    v1: geral=1.000
+Van Refrigerada 2    v0: geral=0.877
+Van Refrigerada 2    v1: geral=1.000
+Van Carga 3          v0: geral=0.916
+Van Carga 3          v1: geral=1.000
+Moto 5               v0: geral=0.669
+Moto 5               v1: geral=1.000
+
+Médias por versão de prompt:
+ prompt                    v0      v1
+geral                  0.824    1.00
+fidelidade_numerica    0.974    1.00
+cobertura              0.646    1.00
+ordem_correta          1.000    1.00
+destaques              1.000    1.00
+estrutura              0.500    1.00
+palavras             548.750  458.25
+
+Detalhes em /Users/romuloocsilva/projetos_pessoais/FIAP TECH CHALLENGE/tech_challenge_fase2_rotas/results/llm_eval.csv

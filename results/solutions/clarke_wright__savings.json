@@ -1,0 +1,932 @@
+{
+  "method": "Clarke-Wright (savings)",
+  "meta": {
+    "tempo_s": 0.0077770830830559134
+  },
+  "routes": [
+    [
+      23,
+      24,
+      31,
+      35,
+      12,
+      8,
+      33,
+      7,
+      2,
+      27,
+      38,
+      20,
+      22,
+      39,
+      9,
+      11,
+      13,
+      29
+    ],
+    [
+      26,
+      19,
+      28,
+      17,
+      6,
+      3,
+      15,
+      1,
+      36,
+      30,
+      37
+    ],
+    [
+      25,
+      18,
+      10,
+      21,
+      5,
+      16,
+      4,
+      40
+    ],
+    [
+      32,
+      14,
+      34
+    ],
+    []
+  ],
+  "scenario": {
+    "name": "sp_40_seed42",
+    "shift_start_min": 480,
+    "shift_end_min": 1020,
+    "road_factor": 1.3,
+    "depot": {
+      "name": "CD Farmacêutico Central — Hospital Universitário",
+      "lat": -23.557,
+      "lon": -46.67,
+      "kind": "deposito",
+      "district": "Pinheiros"
+    },
+    "vehicles": [
+      {
+        "id": 1,
+        "name": "Van Refrigerada 1",
+        "kind": "van",
+        "capacity_kg": 400,
+        "max_range_km": 180,
+        "speed_kmh": 22,
+        "refrigerated": true,
+        "cost_per_km": 1.8
+      },
+      {
+        "id": 2,
+        "name": "Van Refrigerada 2",
+        "kind": "van",
+        "capacity_kg": 400,
+        "max_range_km": 180,
+        "speed_kmh": 22,
+        "refrigerated": true,
+        "cost_per_km": 1.8
+      },
+      {
+        "id": 3,
+        "name": "Van Carga 3",
+        "kind": "van",
+        "capacity_kg": 600,
+        "max_range_km": 200,
+        "speed_kmh": 22,
+        "refrigerated": false,
+        "cost_per_km": 1.5
+      },
+      {
+        "id": 4,
+        "name": "Moto 4",
+        "kind": "moto",
+        "capacity_kg": 25,
+        "max_range_km": 120,
+        "speed_kmh": 32,
+        "refrigerated": false,
+        "cost_per_km": 0.5
+      },
+      {
+        "id": 5,
+        "name": "Moto 5",
+        "kind": "moto",
+        "capacity_kg": 25,
+        "max_range_km": 120,
+        "speed_kmh": 32,
+        "refrigerated": false,
+        "cost_per_km": 0.5
+      }
+    ],
+    "deliveries": [
+      {
+        "id": 1,
+        "location": {
+          "name": "Paciente domiciliar #01 (Jabaquara)",
+          "lat": -23.640747,
+          "lon": -46.634416,
+          "kind": "domiciliar",
+          "district": "Jabaquara"
+        },
+        "demand_kg": 2.9,
+        "priority": 3,
+        "refrigerated": false,
+        "service_min": 12.0,
+        "items": [
+          "Quimioterápicos",
+          "Soro fisiológico",
+          "Analgésicos"
+        ],
+        "window": [
+          660,
+          840
+        ]
+      },
+      {
+        "id": 2,
+        "location": {
+          "name": "Paciente domiciliar #02 (Tatuapé)",
+          "lat": -23.539538,
+          "lon": -46.568109,
+          "kind": "domiciliar",
+          "district": "Tatuapé"
+        },
+        "demand_kg": 4.2,
+        "priority": 2,
+        "refrigerated": true,
+        "service_min": 12.0,
+        "items": [
+          "Insulina",
+          "Material de higiene"
+        ],
+        "window": [
+          510,
+          690
+        ]
+      },
+      {
+        "id": 3,
+        "location": {
+          "name": "Paciente domiciliar #03 (Santo Amaro)",
+          "lat": -23.645442,
+          "lon": -46.711082,
+          "kind": "domiciliar",
+          "district": "Santo Amaro"
+        },
+        "demand_kg": 4.4,
+        "priority": 1,
+        "refrigerated": true,
+        "service_min": 12.0,
+        "items": [
+          "Vacinas",
+          "Seringas e agulhas"
+        ],
+        "window": [
+          600,
+          780
+        ]
+      },
+      {
+        "id": 4,
+        "location": {
+          "name": "Paciente domiciliar #04 (Freguesia do Ó)",
+          "lat": -23.502845,
+          "lon": -46.699586,
+          "kind": "domiciliar",
+          "district": "Freguesia do Ó"
+        },
+        "demand_kg": 4.3,
+        "priority": 2,
+        "refrigerated": false,
+        "service_min": 12.0,
+        "items": [
+          "Seringas e agulhas",
+          "Luvas e EPIs"
+        ],
+        "window": [
+          720,
+          840
+        ]
+      },
+      {
+        "id": 5,
+        "location": {
+          "name": "UBS Pirituba 01",
+          "lat": -23.483198,
+          "lon": -46.728659,
+          "kind": "ubs",
+          "district": "Pirituba"
+        },
+        "demand_kg": 14.9,
+        "priority": 1,
+        "refrigerated": false,
+        "service_min": 10.0,
+        "items": [
+          "Gaze e curativos",
+          "Material de higiene"
+        ],
+        "window": null
+      },
+      {
+        "id": 6,
+        "location": {
+          "name": "UBS Capão Redondo 01",
+          "lat": -23.669976,
+          "lon": -46.774581,
+          "kind": "ubs",
+          "district": "Capão Redondo"
+        },
+        "demand_kg": 29.9,
+        "priority": 1,
+        "refrigerated": false,
+        "service_min": 10.0,
+        "items": [
+          "Soro fisiológico"
+        ],
+        "window": null
+      },
+      {
+        "id": 7,
+        "location": {
+          "name": "UBS Tatuapé 01",
+          "lat": -23.529535,
+          "lon": -46.582061,
+          "kind": "ubs",
+          "district": "Tatuapé"
+        },
+        "demand_kg": 32.2,
+        "priority": 2,
+        "refrigerated": false,
+        "service_min": 10.0,
+        "items": [
+          "Analgésicos"
+        ],
+        "window": null
+      },
+      {
+        "id": 8,
+        "location": {
+          "name": "Clínica de Especialidades Vila Maria 01",
+          "lat": -23.506447,
+          "lon": -46.582441,
+          "kind": "clinica",
+          "district": "Vila Maria"
+        },
+        "demand_kg": 9.7,
+        "priority": 2,
+        "refrigerated": false,
+        "service_min": 8.0,
+        "items": [
+          "Gaze e curativos",
+          "Seringas e agulhas"
+        ],
+        "window": null
+      },
+      {
+        "id": 9,
+        "location": {
+          "name": "Hospital Dia Itaquera 01",
+          "lat": -23.53652,
+          "lon": -46.455003,
+          "kind": "hospital",
+          "district": "Itaquera"
+        },
+        "demand_kg": 68.4,
+        "priority": 1,
+        "refrigerated": false,
+        "service_min": 15.0,
+        "items": [
+          "Soro fisiológico",
+          "Material de higiene"
+        ],
+        "window": null
+      },
+      {
+        "id": 10,
+        "location": {
+          "name": "Paciente domiciliar #10 (Perdizes)",
+          "lat": -23.538541,
+          "lon": -46.679672,
+          "kind": "domiciliar",
+          "district": "Perdizes"
+        },
+        "demand_kg": 1.8,
+        "priority": 1,
+        "refrigerated": false,
+        "service_min": 12.0,
+        "items": [
+          "Analgésicos"
+        ],
+        "window": [
+          510,
+          690
+        ]
+      },
+      {
+        "id": 11,
+        "location": {
+          "name": "Clínica de Especialidades Penha 01",
+          "lat": -23.526689,
+          "lon": -46.546963,
+          "kind": "clinica",
+          "district": "Penha"
+        },
+        "demand_kg": 7.4,
+        "priority": 1,
+        "refrigerated": false,
+        "service_min": 8.0,
+        "items": [
+          "Material de higiene"
+        ],
+        "window": null
+      },
+      {
+        "id": 12,
+        "location": {
+          "name": "Paciente domiciliar #12 (Vila Maria)",
+          "lat": -23.509202,
+          "lon": -46.586338,
+          "kind": "domiciliar",
+          "district": "Vila Maria"
+        },
+        "demand_kg": 2.4,
+        "priority": 2,
+        "refrigerated": false,
+        "service_min": 12.0,
+        "items": [
+          "Analgésicos"
+        ],
+        "window": [
+          570,
+          750
+        ]
+      },
+      {
+        "id": 13,
+        "location": {
+          "name": "Hospital Dia Tatuapé 01",
+          "lat": -23.542373,
+          "lon": -46.570118,
+          "kind": "hospital",
+          "district": "Tatuapé"
+        },
+        "demand_kg": 100.0,
+        "priority": 2,
+        "refrigerated": false,
+        "service_min": 15.0,
+        "items": [
+          "Soro fisiológico",
+          "Seringas e agulhas"
+        ],
+        "window": null
+      },
+      {
+        "id": 14,
+        "location": {
+          "name": "Paciente domiciliar #14 (Penha)",
+          "lat": -23.524371,
+          "lon": -46.543847,
+          "kind": "domiciliar",
+          "district": "Penha"
+        },
+        "demand_kg": 3.5,
+        "priority": 1,
+        "refrigerated": false,
+        "service_min": 12.0,
+        "items": [
+          "Soro fisiológico",
+          "Luvas e EPIs"
+        ],
+        "window": [
+          630,
+          750
+        ]
+      },
+      {
+        "id": 15,
+        "location": {
+          "name": "UBS Jabaquara 01",
+          "lat": -23.635757,
+          "lon": -46.649321,
+          "kind": "ubs",
+          "district": "Jabaquara"
+        },
+        "demand_kg": 30.7,
+        "priority": 3,
+        "refrigerated": false,
+        "service_min": 10.0,
+        "items": [
+          "Antibióticos de amplo espectro",
+          "Material de higiene",
+          "Seringas e agulhas"
+        ],
+        "window": null
+      },
+      {
+        "id": 16,
+        "location": {
+          "name": "Hospital Dia Freguesia do Ó 01",
+          "lat": -23.507109,
+          "lon": -46.693805,
+          "kind": "hospital",
+          "district": "Freguesia do Ó"
+        },
+        "demand_kg": 80.0,
+        "priority": 3,
+        "refrigerated": false,
+        "service_min": 15.0,
+        "items": [
+          "Drogas vasoativas",
+          "Seringas e agulhas",
+          "Material de higiene"
+        ],
+        "window": null
+      },
+      {
+        "id": 17,
+        "location": {
+          "name": "UBS Capão Redondo 02",
+          "lat": -23.677691,
+          "lon": -46.781908,
+          "kind": "ubs",
+          "district": "Capão Redondo"
+        },
+        "demand_kg": 41.4,
+        "priority": 2,
+        "refrigerated": true,
+        "service_min": 10.0,
+        "items": [
+          "Vacinas",
+          "Analgésicos"
+        ],
+        "window": null
+      },
+      {
+        "id": 18,
+        "location": {
+          "name": "UBS Perdizes 01",
+          "lat": -23.547723,
+          "lon": -46.680404,
+          "kind": "ubs",
+          "district": "Perdizes"
+        },
+        "demand_kg": 13.8,
+        "priority": 2,
+        "refrigerated": false,
+        "service_min": 10.0,
+        "items": [
+          "Soro fisiológico",
+          "Analgésicos"
+        ],
+        "window": null
+      },
+      {
+        "id": 19,
+        "location": {
+          "name": "Paciente domiciliar #19 (Campo Limpo)",
+          "lat": -23.653295,
+          "lon": -46.766756,
+          "kind": "domiciliar",
+          "district": "Campo Limpo"
+        },
+        "demand_kg": 2.5,
+        "priority": 1,
+        "refrigerated": true,
+        "service_min": 12.0,
+        "items": [
+          "Vacinas",
+          "Seringas e agulhas",
+          "Analgésicos"
+        ],
+        "window": [
+          540,
+          720
+        ]
+      },
+      {
+        "id": 20,
+        "location": {
+          "name": "Clínica de Especialidades São Miguel Paulista 01",
+          "lat": -23.502584,
+          "lon": -46.440877,
+          "kind": "clinica",
+          "district": "São Miguel Paulista"
+        },
+        "demand_kg": 20.0,
+        "priority": 3,
+        "refrigerated": false,
+        "service_min": 8.0,
+        "items": [
+          "Anticoagulantes",
+          "Analgésicos",
+          "Luvas e EPIs"
+        ],
+        "window": null
+      },
+      {
+        "id": 21,
+        "location": {
+          "name": "Paciente domiciliar #21 (Pirituba)",
+          "lat": -23.484999,
+          "lon": -46.714858,
+          "kind": "domiciliar",
+          "district": "Pirituba"
+        },
+        "demand_kg": 2.3,
+        "priority": 1,
+        "refrigerated": false,
+        "service_min": 12.0,
+        "items": [
+          "Seringas e agulhas",
+          "Material de higiene"
+        ],
+        "window": [
+          510,
+          690
+        ]
+      },
+      {
+        "id": 22,
+        "location": {
+          "name": "Paciente domiciliar #22 (Guaianases)",
+          "lat": -23.529444,
+          "lon": -46.399934,
+          "kind": "domiciliar",
+          "district": "Guaianases"
+        },
+        "demand_kg": 2.6,
+        "priority": 3,
+        "refrigerated": true,
+        "service_min": 12.0,
+        "items": [
+          "Insulina",
+          "Anticoagulantes",
+          "Analgésicos"
+        ],
+        "window": [
+          780,
+          900
+        ]
+      },
+      {
+        "id": 23,
+        "location": {
+          "name": "Paciente domiciliar #23 (Perdizes)",
+          "lat": -23.536036,
+          "lon": -46.678144,
+          "kind": "domiciliar",
+          "district": "Perdizes"
+        },
+        "demand_kg": 3.5,
+        "priority": 3,
+        "refrigerated": true,
+        "service_min": 12.0,
+        "items": [
+          "Hemoderivados",
+          "Anticoagulantes"
+        ],
+        "window": [
+          510,
+          690
+        ]
+      },
+      {
+        "id": 24,
+        "location": {
+          "name": "Clínica de Especialidades Casa Verde 01",
+          "lat": -23.518532,
+          "lon": -46.662147,
+          "kind": "clinica",
+          "district": "Casa Verde"
+        },
+        "demand_kg": 7.6,
+        "priority": 1,
+        "refrigerated": false,
+        "service_min": 8.0,
+        "items": [
+          "Analgésicos"
+        ],
+        "window": null
+      },
+      {
+        "id": 25,
+        "location": {
+          "name": "UBS Ipiranga 01",
+          "lat": -23.592389,
+          "lon": -46.608294,
+          "kind": "ubs",
+          "district": "Ipiranga"
+        },
+        "demand_kg": 42.4,
+        "priority": 2,
+        "refrigerated": false,
+        "service_min": 10.0,
+        "items": [
+          "Gaze e curativos",
+          "Material de higiene"
+        ],
+        "window": null
+      },
+      {
+        "id": 26,
+        "location": {
+          "name": "Hospital Dia Lapa 01",
+          "lat": -23.525303,
+          "lon": -46.702764,
+          "kind": "hospital",
+          "district": "Lapa"
+        },
+        "demand_kg": 81.7,
+        "priority": 3,
+        "refrigerated": true,
+        "service_min": 15.0,
+        "items": [
+          "Imunobiológicos",
+          "Quimioterápicos"
+        ],
+        "window": null
+      },
+      {
+        "id": 27,
+        "location": {
+          "name": "Paciente domiciliar #27 (São Mateus)",
+          "lat": -23.606012,
+          "lon": -46.487244,
+          "kind": "domiciliar",
+          "district": "São Mateus"
+        },
+        "demand_kg": 2.2,
+        "priority": 1,
+        "refrigerated": true,
+        "service_min": 12.0,
+        "items": [
+          "Imunobiológicos"
+        ],
+        "window": [
+          570,
+          690
+        ]
+      },
+      {
+        "id": 28,
+        "location": {
+          "name": "Clínica de Especialidades Capão Redondo 01",
+          "lat": -23.679437,
+          "lon": -46.782706,
+          "kind": "clinica",
+          "district": "Capão Redondo"
+        },
+        "demand_kg": 22.3,
+        "priority": 2,
+        "refrigerated": false,
+        "service_min": 8.0,
+        "items": [
+          "Soro fisiológico"
+        ],
+        "window": null
+      },
+      {
+        "id": 29,
+        "location": {
+          "name": "UBS Vila Prudente 01",
+          "lat": -23.592012,
+          "lon": -46.587677,
+          "kind": "ubs",
+          "district": "Vila Prudente"
+        },
+        "demand_kg": 15.1,
+        "priority": 1,
+        "refrigerated": true,
+        "service_min": 10.0,
+        "items": [
+          "Insulina",
+          "Luvas e EPIs",
+          "Seringas e agulhas"
+        ],
+        "window": null
+      },
+      {
+        "id": 30,
+        "location": {
+          "name": "Paciente domiciliar #30 (Perdizes)",
+          "lat": -23.537717,
+          "lon": -46.671559,
+          "kind": "domiciliar",
+          "district": "Perdizes"
+        },
+        "demand_kg": 1.3,
+        "priority": 3,
+        "refrigerated": true,
+        "service_min": 12.0,
+        "items": [
+          "Vacinas",
+          "Quimioterápicos"
+        ],
+        "window": [
+          600,
+          780
+        ]
+      },
+      {
+        "id": 31,
+        "location": {
+          "name": "UBS Santana 01",
+          "lat": -23.505587,
+          "lon": -46.621699,
+          "kind": "ubs",
+          "district": "Santana"
+        },
+        "demand_kg": 40.6,
+        "priority": 1,
+        "refrigerated": false,
+        "service_min": 10.0,
+        "items": [
+          "Gaze e curativos",
+          "Material de higiene"
+        ],
+        "window": null
+      },
+      {
+        "id": 32,
+        "location": {
+          "name": "Paciente domiciliar #32 (Vila Prudente)",
+          "lat": -23.583681,
+          "lon": -46.565348,
+          "kind": "domiciliar",
+          "district": "Vila Prudente"
+        },
+        "demand_kg": 3.6,
+        "priority": 1,
+        "refrigerated": true,
+        "service_min": 12.0,
+        "items": [
+          "Insulina"
+        ],
+        "window": [
+          480,
+          600
+        ]
+      },
+      {
+        "id": 33,
+        "location": {
+          "name": "UBS Vila Maria 01",
+          "lat": -23.510161,
+          "lon": -46.576639,
+          "kind": "ubs",
+          "district": "Vila Maria"
+        },
+        "demand_kg": 38.1,
+        "priority": 3,
+        "refrigerated": false,
+        "service_min": 10.0,
+        "items": [
+          "Drogas vasoativas",
+          "Analgésicos",
+          "Gaze e curativos"
+        ],
+        "window": null
+      },
+      {
+        "id": 34,
+        "location": {
+          "name": "Paciente domiciliar #34 (Vila Mariana)",
+          "lat": -23.591045,
+          "lon": -46.634724,
+          "kind": "domiciliar",
+          "district": "Vila Mariana"
+        },
+        "demand_kg": 4.2,
+        "priority": 1,
+        "refrigerated": false,
+        "service_min": 12.0,
+        "items": [
+          "Analgésicos",
+          "Material de higiene"
+        ],
+        "window": [
+          630,
+          750
+        ]
+      },
+      {
+        "id": 35,
+        "location": {
+          "name": "UBS Tucuruvi 01",
+          "lat": -23.492297,
+          "lon": -46.600704,
+          "kind": "ubs",
+          "district": "Tucuruvi"
+        },
+        "demand_kg": 21.5,
+        "priority": 2,
+        "refrigerated": false,
+        "service_min": 10.0,
+        "items": [
+          "Soro fisiológico"
+        ],
+        "window": null
+      },
+      {
+        "id": 36,
+        "location": {
+          "name": "UBS Butantã 01",
+          "lat": -23.57837,
+          "lon": -46.710341,
+          "kind": "ubs",
+          "district": "Butantã"
+        },
+        "demand_kg": 28.7,
+        "priority": 1,
+        "refrigerated": false,
+        "service_min": 10.0,
+        "items": [
+          "Analgésicos",
+          "Seringas e agulhas"
+        ],
+        "window": null
+      },
+      {
+        "id": 37,
+        "location": {
+          "name": "Paciente domiciliar #37 (Penha)",
+          "lat": -23.520204,
+          "lon": -46.546076,
+          "kind": "domiciliar",
+          "district": "Penha"
+        },
+        "demand_kg": 4.5,
+        "priority": 1,
+        "refrigerated": true,
+        "service_min": 12.0,
+        "items": [
+          "Imunobiológicos"
+        ],
+        "window": [
+          720,
+          840
+        ]
+      },
+      {
+        "id": 38,
+        "location": {
+          "name": "Paciente domiciliar #38 (São Miguel Paulista)",
+          "lat": -23.489801,
+          "lon": -46.438744,
+          "kind": "domiciliar",
+          "district": "São Miguel Paulista"
+        },
+        "demand_kg": 5.0,
+        "priority": 1,
+        "refrigerated": true,
+        "service_min": 12.0,
+        "items": [
+          "Insulina",
+          "Material de higiene"
+        ],
+        "window": [
+          720,
+          900
+        ]
+      },
+      {
+        "id": 39,
+        "location": {
+          "name": "Clínica de Especialidades Guaianases 01",
+          "lat": -23.536537,
+          "lon": -46.416893,
+          "kind": "clinica",
+          "district": "Guaianases"
+        },
+        "demand_kg": 17.3,
+        "priority": 1,
+        "refrigerated": false,
+        "service_min": 8.0,
+        "items": [
+          "Luvas e EPIs",
+          "Seringas e agulhas"
+        ],
+        "window": null
+      },
+      {
+        "id": 40,
+        "location": {
+          "name": "UBS Casa Verde 01",
+          "lat": -23.505739,
+          "lon": -46.672039,
+          "kind": "ubs",
+          "district": "Casa Verde"
+        },
+        "demand_kg": 31.0,
+        "priority": 1,
+        "refrigerated": false,
+        "service_min": 10.0,
+        "items": [
+          "Analgésicos",
+          "Material de higiene"
+        ],
+        "window": null
+      }
+    ]
+  }
+}

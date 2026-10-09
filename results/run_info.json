@@ -1,0 +1,11 @@
+{
+  "deliveries": 40,
+  "scenario_seed": 42,
+  "seeds": 5,
+  "generations": 1500,
+  "ortools_time": 30,
+  "quick": false,
+  "out": "/Users/romuloocsilva/projetos_pessoais/FIAP TECH CHALLENGE/tech_challenge_fase2_rotas/results",
+  "best_overall": "OR-Tools (GLS 30s)",
+  "best_ga": "AG — E9_memetico (melhor de 5 seeds)"
+}

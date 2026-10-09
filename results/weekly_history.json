@@ -1,0 +1,436 @@
+{
+  "periodo": "2026-10-05 a 2026-10-11",
+  "totais": {
+    "dias": 7,
+    "entregas": 284,
+    "entregas_criticas": 62,
+    "entregas_refrigeradas": 75,
+    "km_otimizado": 2144.8,
+    "km_metodo_anterior": 2837.0,
+    "economia_km": 692.2,
+    "economia_km_pct": 24.4,
+    "custo_otimizado_rs": 3286.75,
+    "custo_metodo_anterior_rs": 4085.48,
+    "economia_rs": 798.73,
+    "horas_conducao_otimizado": 93.3,
+    "horas_conducao_anterior": 120.7,
+    "economia_horas": 27.4,
+    "dias_viaveis_otimizado": 7,
+    "dias_viaveis_anterior": 2,
+    "tempo_medio_ate_criticas_h_otimizado": 1.79,
+    "tempo_medio_ate_criticas_h_anterior": 4.72
+  },
+  "padroes": {
+    "ocupacao_media_por_veiculo_pct": {
+      "Van Refrigerada 1": 78.1,
+      "Van Refrigerada 2": 77.3,
+      "Van Carga 3": 48.8,
+      "Moto 4": 37.3,
+      "Moto 5": 43.8
+    },
+    "dias_sem_uso_por_veiculo": {
+      "Van Refrigerada 1": 0,
+      "Van Refrigerada 2": 0,
+      "Van Carga 3": 0,
+      "Moto 4": 4,
+      "Moto 5": 3
+    },
+    "km_semana_por_veiculo": {
+      "Van Refrigerada 1": 508.3,
+      "Van Refrigerada 2": 695.7,
+      "Van Carga 3": 649.0,
+      "Moto 4": 128.2,
+      "Moto 5": 163.5
+    },
+    "atraso_total_por_bairro_min": {},
+    "dia_maior_demanda": "sexta",
+    "dia_menor_economia": "domingo"
+  },
+  "dias": [
+    {
+      "data": "2026-10-05",
+      "dia_semana": "segunda",
+      "entregas": 35,
+      "criticas": 8,
+      "refrigeradas": 10,
+      "demanda_kg": 769.9,
+      "ag": {
+        "distancia_total_km": 280.92,
+        "custo_operacional_rs": 447.21,
+        "viavel": true,
+        "veiculos_usados": 4,
+        "tempo_medio_ate_criticas_h": 1.54,
+        "horas_conducao": 12.32,
+        "violacoes": {
+          "overload_kg": 0.0,
+          "over_range_km": 0.0,
+          "refrigeration": 0,
+          "late_min": 0.0,
+          "overtime_min": 0.0
+        },
+        "atraso_por_bairro_min": {},
+        "ocupacao_por_veiculo_pct": {
+          "Van Refrigerada 1": 55.6,
+          "Van Refrigerada 2": 58.0,
+          "Van Carga 3": 49.4,
+          "Moto 4": 77.6,
+          "Moto 5": 0.0
+        },
+        "km_por_veiculo": {
+          "Van Refrigerada 1": 62.4,
+          "Van Refrigerada 2": 129.6,
+          "Van Carga 3": 57.0,
+          "Moto 4": 31.8,
+          "Moto 5": 0.0
+        }
+      },
+      "anterior": {
+        "distancia_total_km": 330.78,
+        "custo_operacional_rs": 557.83,
+        "viavel": true,
+        "veiculos_usados": 3,
+        "tempo_medio_ate_criticas_h": 3.34,
+        "horas_conducao": 15.04,
+        "violacoes": {
+          "overload_kg": 0.0,
+          "over_range_km": 0.0,
+          "refrigeration": 0,
+          "late_min": 0.0,
+          "overtime_min": 0.0
+        }
+      },
+      "economia_km": 49.9,
+      "economia_pct": 15.1
+    },
+    {
+      "data": "2026-10-06",
+      "dia_semana": "terça",
+      "entregas": 47,
+      "criticas": 11,
+      "refrigeradas": 8,
+      "demanda_kg": 1092.5,
+      "ag": {
+        "distancia_total_km": 388.62,
+        "custo_operacional_rs": 557.57,
+        "viavel": true,
+        "veiculos_usados": 5,
+        "tempo_medio_ate_criticas_h": 1.78,
+        "horas_conducao": 16.62,
+        "violacoes": {
+          "overload_kg": 0.0,
+          "over_range_km": 0.0,
+          "refrigeration": 0,
+          "late_min": 0.0,
+          "overtime_min": 0.0
+        },
+        "atraso_por_bairro_min": {},
+        "ocupacao_por_veiculo_pct": {
+          "Van Refrigerada 1": 90.9,
+          "Van Refrigerada 2": 84.9,
+          "Van Carga 3": 57.5,
+          "Moto 4": 87.6,
+          "Moto 5": 90.0
+        },
+        "km_por_veiculo": {
+          "Van Refrigerada 1": 70.5,
+          "Van Refrigerada 2": 89.3,
+          "Van Carga 3": 155.5,
+          "Moto 4": 42.5,
+          "Moto 5": 30.8
+        }
+      },
+      "anterior": {
+        "distancia_total_km": 477.1,
+        "custo_operacional_rs": 676.34,
+        "viavel": false,
+        "veiculos_usados": 5,
+        "tempo_medio_ate_criticas_h": 4.96,
+        "horas_conducao": 20.08,
+        "violacoes": {
+          "overload_kg": 0.7,
+          "over_range_km": 0.0,
+          "refrigeration": 0,
+          "late_min": 0.0,
+          "overtime_min": 15.19
+        }
+      },
+      "economia_km": 88.5,
+      "economia_pct": 18.5
+    },
+    {
+      "data": "2026-10-07",
+      "dia_semana": "quarta",
+      "entregas": 42,
+      "criticas": 4,
+      "refrigeradas": 17,
+      "demanda_kg": 868.5,
+      "ag": {
+        "distancia_total_km": 365.5,
+        "custo_operacional_rs": 562.4,
+        "viavel": true,
+        "veiculos_usados": 4,
+        "tempo_medio_ate_criticas_h": 2.78,
+        "horas_conducao": 15.89,
+        "violacoes": {
+          "overload_kg": 0.0,
+          "over_range_km": 0.0,
+          "refrigeration": 0,
+          "late_min": 0.0,
+          "overtime_min": 0.0
+        },
+        "atraso_por_bairro_min": {},
+        "ocupacao_por_veiculo_pct": {
+          "Van Refrigerada 1": 94.6,
+          "Van Refrigerada 2": 65.4,
+          "Van Carga 3": 34.7,
+          "Moto 4": 0.0,
+          "Moto 5": 80.8
+        },
+        "km_por_veiculo": {
+          "Van Refrigerada 1": 100.0,
+          "Van Refrigerada 2": 116.0,
+          "Van Carga 3": 98.9,
+          "Moto 4": 0.0,
+          "Moto 5": 50.6
+        }
+      },
+      "anterior": {
+        "distancia_total_km": 498.69,
+        "custo_operacional_rs": 731.95,
+        "viavel": false,
+        "veiculos_usados": 5,
+        "tempo_medio_ate_criticas_h": 6.06,
+        "horas_conducao": 21.2,
+        "violacoes": {
+          "overload_kg": 0.0,
+          "over_range_km": 0.0,
+          "refrigeration": 1,
+          "late_min": 0.0,
+          "overtime_min": 3.14
+        }
+      },
+      "economia_km": 133.2,
+      "economia_pct": 26.7
+    },
+    {
+      "data": "2026-10-08",
+      "dia_semana": "quinta",
+      "entregas": 37,
+      "criticas": 8,
+      "refrigeradas": 7,
+      "demanda_kg": 770.4,
+      "ag": {
+        "distancia_total_km": 268.24,
+        "custo_operacional_rs": 383.47,
+        "viavel": true,
+        "veiculos_usados": 4,
+        "tempo_medio_ate_criticas_h": 1.29,
+        "horas_conducao": 11.43,
+        "violacoes": {
+          "overload_kg": 0.0,
+          "over_range_km": 0.0,
+          "refrigeration": 0,
+          "late_min": 0.0,
+          "overtime_min": 0.0
+        },
+        "atraso_por_bairro_min": {},
+        "ocupacao_por_veiculo_pct": {
+          "Van Refrigerada 1": 62.4,
+          "Van Refrigerada 2": 63.5,
+          "Van Carga 3": 40.5,
+          "Moto 4": 96.0,
+          "Moto 5": 0.0
+        },
+        "km_por_veiculo": {
+          "Van Refrigerada 1": 49.1,
+          "Van Refrigerada 2": 67.4,
+          "Van Carga 3": 97.8,
+          "Moto 4": 53.9,
+          "Moto 5": 0.0
+        }
+      },
+      "anterior": {
+        "distancia_total_km": 470.62,
+        "custo_operacional_rs": 580.52,
+        "viavel": false,
+        "veiculos_usados": 5,
+        "tempo_medio_ate_criticas_h": 4.43,
+        "horas_conducao": 19.03,
+        "violacoes": {
+          "overload_kg": 5.2,
+          "over_range_km": 0.0,
+          "refrigeration": 0,
+          "late_min": 0.0,
+          "overtime_min": 0.0
+        }
+      },
+      "economia_km": 202.4,
+      "economia_pct": 43.0
+    },
+    {
+      "data": "2026-10-09",
+      "dia_semana": "sexta",
+      "entregas": 44,
+      "criticas": 8,
+      "refrigeradas": 9,
+      "demanda_kg": 1213.8,
+      "ag": {
+        "distancia_total_km": 294.04,
+        "custo_operacional_rs": 435.65,
+        "viavel": true,
+        "veiculos_usados": 4,
+        "tempo_medio_ate_criticas_h": 0.86,
+        "horas_conducao": 12.63,
+        "violacoes": {
+          "overload_kg": 0.0,
+          "over_range_km": 0.0,
+          "refrigeration": 0,
+          "late_min": 0.0,
+          "overtime_min": 0.0
+        },
+        "atraso_por_bairro_min": {},
+        "ocupacao_por_veiculo_pct": {
+          "Van Refrigerada 1": 99.8,
+          "Van Refrigerada 2": 94.5,
+          "Van Carga 3": 70.1,
+          "Moto 4": 0.0,
+          "Moto 5": 62.0
+        },
+        "km_por_veiculo": {
+          "Van Refrigerada 1": 63.4,
+          "Van Refrigerada 2": 91.8,
+          "Van Carga 3": 86.9,
+          "Moto 4": 0.0,
+          "Moto 5": 52.0
+        }
+      },
+      "anterior": {
+        "distancia_total_km": 390.18,
+        "custo_operacional_rs": 456.13,
+        "viavel": false,
+        "veiculos_usados": 5,
+        "tempo_medio_ate_criticas_h": 4.7,
+        "horas_conducao": 15.47,
+        "violacoes": {
+          "overload_kg": 16.8,
+          "over_range_km": 0.0,
+          "refrigeration": 0,
+          "late_min": 0.0,
+          "overtime_min": 0.0
+        }
+      },
+      "economia_km": 96.1,
+      "economia_pct": 24.6
+    },
+    {
+      "data": "2026-10-10",
+      "dia_semana": "sábado",
+      "entregas": 39,
+      "criticas": 11,
+      "refrigeradas": 9,
+      "demanda_kg": 975.4,
+      "ag": {
+        "distancia_total_km": 256.91,
+        "custo_operacional_rs": 442.36,
+        "viavel": true,
+        "veiculos_usados": 3,
+        "tempo_medio_ate_criticas_h": 2.29,
+        "horas_conducao": 11.68,
+        "violacoes": {
+          "overload_kg": 0.0,
+          "over_range_km": 0.0,
+          "refrigeration": 0,
+          "late_min": 0.0,
+          "overtime_min": 0.0
+        },
+        "atraso_por_bairro_min": {},
+        "ocupacao_por_veiculo_pct": {
+          "Van Refrigerada 1": 91.4,
+          "Van Refrigerada 2": 76.4,
+          "Van Carga 3": 50.7,
+          "Moto 4": 0.0,
+          "Moto 5": 0.0
+        },
+        "km_por_veiculo": {
+          "Van Refrigerada 1": 80.9,
+          "Van Refrigerada 2": 109.1,
+          "Van Carga 3": 66.9,
+          "Moto 4": 0.0,
+          "Moto 5": 0.0
+        }
+      },
+      "anterior": {
+        "distancia_total_km": 344.03,
+        "custo_operacional_rs": 529.54,
+        "viavel": true,
+        "veiculos_usados": 5,
+        "tempo_medio_ate_criticas_h": 4.81,
+        "horas_conducao": 15.11,
+        "violacoes": {
+          "overload_kg": 0.0,
+          "over_range_km": 0.0,
+          "refrigeration": 0,
+          "late_min": 0.0,
+          "overtime_min": 0.0
+        }
+      },
+      "economia_km": 87.1,
+      "economia_pct": 25.3
+    },
+    {
+      "data": "2026-10-11",
+      "dia_semana": "domingo",
+      "entregas": 40,
+      "criticas": 12,
+      "refrigeradas": 15,
+      "demanda_kg": 850.9,
+      "ag": {
+        "distancia_total_km": 290.58,
+        "custo_operacional_rs": 458.09,
+        "viavel": true,
+        "veiculos_usados": 4,
+        "tempo_medio_ate_criticas_h": 2.0,
+        "horas_conducao": 12.78,
+        "violacoes": {
+          "overload_kg": 0.0,
+          "over_range_km": 0.0,
+          "refrigeration": 0,
+          "late_min": 0.0,
+          "overtime_min": 0.0
+        },
+        "atraso_por_bairro_min": {},
+        "ocupacao_por_veiculo_pct": {
+          "Van Refrigerada 1": 52.2,
+          "Van Refrigerada 2": 98.3,
+          "Van Carga 3": 38.4,
+          "Moto 4": 0.0,
+          "Moto 5": 74.0
+        },
+        "km_por_veiculo": {
+          "Van Refrigerada 1": 82.0,
+          "Van Refrigerada 2": 92.5,
+          "Van Carga 3": 86.0,
+          "Moto 4": 0.0,
+          "Moto 5": 30.1
+        }
+      },
+      "anterior": {
+        "distancia_total_km": 325.59,
+        "custo_operacional_rs": 553.17,
+        "viavel": false,
+        "veiculos_usados": 3,
+        "tempo_medio_ate_criticas_h": 4.73,
+        "horas_conducao": 14.8,
+        "violacoes": {
+          "overload_kg": 0.0,
+          "over_range_km": 0.0,
+          "refrigeration": 0,
+          "late_min": 0.0,
+          "overtime_min": 1.91
+        }
+      },
+      "economia_km": 35.0,
+      "economia_pct": 10.8
+    }
+  ]
+}
