@@ -73,7 +73,7 @@ ingênuo inventou números, deixou paradas de fora e não seguiu uma estrutura.
 │   └── cli.py               # linha de comando `rotas`
 ├── app/streamlit_app.py     # interface web de demonstração
 ├── legacy/                  # código-base de TSP fornecido (com 4 bugs corrigidos e anotados)
-├── tests/                   # 40 testes automatizados (pytest)
+├── tests/                   # 53 testes automatizados (pytest)
 ├── scripts/scalability.py   # estudo de escalabilidade (20/40/80 entregas)
 ├── notebooks/demo.ipynb     # notebook de demonstração
 ├── results/                 # resultados, gráficos, mapas e textos gerados pela LLM
@@ -112,6 +112,14 @@ modelos de reserva (`GEMINI_FALLBACK_MODELS`, por padrão `gemini-3.5-flash-lite
 `gemini-3.1-flash-lite`). Sem chave, ou com `LLM_PROVIDER=mock`, tudo roda offline com
 respostas determinísticas.
 
+**Alternativa local (Ollama), sem cota e sem internet:**
+
+```bash
+ollama serve &                 # em outro terminal, se o app do Ollama não estiver aberto
+ollama pull qwen2.5:14b        # ou outro modelo; ajuste OLLAMA_MODEL no .env
+# no .env: LLM_PROVIDER=ollama  (OLLAMA_BASE_URL padrão: http://localhost:11434)
+```
+
 ### 3. Comandos
 
 ```bash
@@ -119,6 +127,7 @@ rotas experiments              # 9 configurações × 5 seeds + comparativo (~4 
 rotas experiments --quick      # versão rápida (~30 s)
 rotas simulate-week            # 7 dias de operação simulados (~15 s)
 rotas solve --memetic          # gera um cenário, otimiza e salva solução + mapa
+rotas map --all                # regenera os mapas a partir das soluções salvas (sem reotimizar)
 
 rotas instructions --vehicle 1 # instruções para o motorista (LLM)
 rotas report --kind diario     # relatório diário (LLM)
@@ -134,6 +143,9 @@ pytest                               # testes
 
 Os mapas interativos ficam em `results/mapa_ag.html`, `results/mapa_vizinho_mais_proximo.html`
 e `results/mapa_codigo_base.html`. Para vê-los, basta abrir no navegador.
+O trajeto de cada veículo é desenhado pelas ruas (OSRM público, sem chave; cache em
+`results/road_cache.json`). Sem internet, ou com `ROTAS_ROADS=off`, o mapa usa linhas retas
+tracejadas. O km usado na otimização continua sendo Haversine × 1,3.
 
 ---
 

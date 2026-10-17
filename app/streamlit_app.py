@@ -34,6 +34,18 @@ def load_csv(name: str) -> pd.DataFrame | None:
     return pd.read_csv(p) if p.exists() else None
 
 
+def llm(label: str, fn, *args) -> str | None:
+    """Chama a LLM com indicador de carregamento visível (e cronômetro) e erro amigável."""
+    try:
+        with st.spinner(f"⏳ {label} com **{prov.name}**... (modelos locais podem levar até 1 min)", show_time=True):
+            out = fn(*args)
+    except Exception as e:  # noqa: BLE001 — qualquer falha da LLM vira mensagem na tela, não traceback
+        st.error(f"Não foi possível gerar o texto: {e}")
+        return None
+    st.toast(f"{label}: pronto!", icon="✅")
+    return out
+
+
 def load_week() -> dict | None:
     p = RESULTS / "weekly_history.json"
     return json.loads(p.read_text()) if p.exists() else None
@@ -86,7 +98,7 @@ st.session_state.source = source
 
 prov = provider()
 st.sidebar.divider()
-st.sidebar.caption(f"LLM: **{prov.name}**" + (f" · {getattr(prov, 'model', '')}" if prov.name == "gemini" else " (offline)"))
+st.sidebar.caption(f"LLM: **{prov.name}**" + (f" · {getattr(prov, 'model', '')}" if prov.name in ("gemini", "ollama") else " (offline)"))
 
 sol: Solution | None = st.session_state.get("solution")
 if sol is None:
@@ -150,8 +162,10 @@ with tab_cmp:
 with tab_instr:
     used = [r for r in details if r["usado"]]
     choice = st.selectbox("Veículo", used, format_func=lambda r: f"{r['veiculo']} — {len(r['paradas'])} paradas")
-    if st.button("Gerar instruções para o motorista"):
-        cache[("instr", choice["veiculo_id"])] = assistant.driver_instructions(choice["veiculo_id"])
+    if st.button("Gerar instruções para o motorista", type="primary"):
+        out = llm("Gerando instruções para o motorista", assistant.driver_instructions, choice["veiculo_id"])
+        if out is not None:
+            cache[("instr", choice["veiculo_id"])] = out
     if ("instr", choice["veiculo_id"]) in cache:
         st.markdown(cache[("instr", choice["veiculo_id"])])
 
@@ -168,10 +182,12 @@ with tab_rep:
                     f"{t['tempo_medio_ate_criticas_h_otimizado'] - t['tempo_medio_ate_criticas_h_anterior']:.2f} h", delta_color="inverse")
     if kind != "Diário" and not week:
         st.info("Rode `rotas simulate-week` para gerar o histórico semanal.")
-    elif st.button(f"Gerar: {kind}"):
+    elif st.button(f"Gerar: {kind}", type="primary"):
         fn = {"Diário": assistant.daily_report, "Semanal": assistant.weekly_report,
               "Sugestões de melhoria": assistant.improvement_suggestions}[kind]
-        cache[("rep", kind)] = fn()
+        out = llm(f"Gerando {kind.lower()}", fn)
+        if out is not None:
+            cache[("rep", kind)] = out
     if ("rep", kind) in cache:
         st.markdown(cache[("rep", kind)])
 
@@ -185,7 +201,9 @@ with tab_chat:
         st.chat_message(m["role"]).markdown(m["content"])
     if q := st.chat_input("Pergunte sobre as rotas e entregas do dia"):
         st.chat_message("user").markdown(q)
-        with st.spinner("Consultando..."):
-            a = st.session_state.chat.send(q)
-        st.chat_message("assistant").markdown(a)
-        st.session_state.messages += [{"role": "user", "content": q}, {"role": "assistant", "content": a}]
+        with st.chat_message("assistant"):
+            a = llm("Consultando as rotas", st.session_state.chat.send, q)
+            if a is not None:
+                st.markdown(a)
+        if a is not None:
+            st.session_state.messages += [{"role": "user", "content": q}, {"role": "assistant", "content": a}]

@@ -254,6 +254,7 @@ Cenários com seed 7; frota de 5 veículos até 40 entregas e de 8 veículos com
 ### 7.1 Arquitetura
 
 - **Provedor:** Google Gemini, plano gratuito, pelo SDK oficial `google-genai`. Há também um
+  provedor **Ollama** (modelo local, padrão `qwen2.5:14b`, com chamada de ferramentas) e um
   provedor **mock** offline e determinístico, usado nos testes e quando não há chave.
 - **Cadeia de modelos de reserva:** o plano gratuito do `gemini-3.5-flash` permitiu apenas
   **20 requisições por dia**, e esgotamos essa cota durante o desenvolvimento. Ao detectar o
@@ -377,8 +378,9 @@ novos blocos de contexto, sem alterar o otimizador.
 
 ## 9. Limitações e próximos passos
 
-- **Distâncias aproximadas** (Haversine × 1,3). Próximo passo: matriz real de ruas (OSRM ou
-  Google Routes) e tempos que variam com o horário do trânsito.
+- **Distâncias aproximadas** (Haversine × 1,3). Os mapas já desenham o trajeto pelas ruas
+  (OSRM, `rotas.viz.roads`), mas só como ilustração. Próximo passo: o otimizador também usar a
+  matriz real de ruas (OSRM ou Google Routes) e tempos que variam com o horário do trânsito.
 - **Uma viagem por veículo por turno.** Extensão: múltiplas viagens com recarga no depósito.
 - **Dados sintéticos.** Os pesos de prioridade e as penalidades devem ser calibrados com a
   operação real.
@@ -397,7 +399,7 @@ rotas experiments                # experimentos + comparativo (seção 4 e 5)
 python scripts/scalability.py    # seção 5.1
 rotas simulate-week              # seção 7.3
 rotas report --kind semanal && rotas suggest && rotas llm-eval
-pytest                           # 40 testes
+pytest                           # 53 testes
 ```
 
 Todas as execuções usam seeds fixas: cenário 42, AG com seeds de 1 a 5 e semana com seeds de

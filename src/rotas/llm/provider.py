@@ -2,10 +2,12 @@
 
 * ``GeminiProvider`` — Google Gemini via SDK ``google-genai`` (plano gratuito do AI Studio),
   com cadeia de modelos de reserva e espera exponencial para limites por minuto.
+* ``OllamaProvider`` — modelo local via Ollama (``ollama serve``), sem cota nem internet.
 * ``MockProvider``   — offline e determinístico; usado em testes e quando não há chave.
 
-Seleção por variável de ambiente: ``LLM_PROVIDER=gemini|mock`` (padrão: gemini se houver
-``GEMINI_API_KEY``, senão mock) e ``GEMINI_MODEL`` (padrão ``gemini-3.5-flash``).
+Seleção por variável de ambiente: ``LLM_PROVIDER=gemini|ollama|mock`` (padrão: gemini se houver
+``GEMINI_API_KEY``, senão mock), ``GEMINI_MODEL`` (padrão ``gemini-3.5-flash``),
+``OLLAMA_MODEL`` (padrão ``qwen2.5:14b``) e ``OLLAMA_BASE_URL`` (padrão ``http://localhost:11434``).
 """
 
 from __future__ import annotations
@@ -23,6 +25,8 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 DEFAULT_GEMINI_MODEL = "gemini-3.5-flash"
+DEFAULT_OLLAMA_MODEL = "qwen2.5:14b"
+DEFAULT_OLLAMA_URL = "http://localhost:11434"
 
 
 class ChatSession(Protocol):
@@ -156,6 +160,120 @@ class GeminiProvider:
 
         return _Session()
 
+# ------------------------------------------------------------------------------ Ollama
+
+_JSON_TYPES = {"str": "string", "int": "integer", "float": "number", "bool": "boolean"}
+_PY_TYPES = {"int": int, "float": float, "str": str}
+MAX_TOOL_ROUNDS = 10
+
+
+def _annotation_name(annotation) -> str:
+    # com ``from __future__ import annotations`` a anotação chega como texto ("int")
+    return annotation if isinstance(annotation, str) else getattr(annotation, "__name__", str(annotation))
+
+
+def _tool_schema(tool: Callable) -> dict:
+    """Schema JSON (formato OpenAI/Ollama) a partir da assinatura e docstring da função."""
+    import inspect
+
+    properties, required = {}, []
+    for name, param in inspect.signature(tool).parameters.items():
+        properties[name] = {"type": _JSON_TYPES.get(_annotation_name(param.annotation), "string")}
+        if param.default is inspect.Parameter.empty:
+            required.append(name)
+    return {
+        "type": "function",
+        "function": {
+            "name": tool.__name__,
+            "description": inspect.getdoc(tool) or f"Executa a ferramenta {tool.__name__}.",
+            "parameters": {"type": "object", "properties": properties, "required": required},
+        },
+    }
+
+
+def _call_tool(tool: Callable, arguments: dict) -> str:
+    """Executa a ferramenta convertendo os argumentos para o tipo anotado (modelos locais às
+    vezes mandam ``"3"`` em vez de ``3``). Erros voltam como texto para o modelo."""
+    import inspect
+
+    try:
+        params = inspect.signature(tool).parameters
+        kwargs = {}
+        for k, v in (arguments or {}).items():
+            cast = _PY_TYPES.get(_annotation_name(params[k].annotation)) if k in params else None
+            kwargs[k] = cast(v) if cast and not isinstance(v, cast) else v
+        result = tool(**kwargs)
+    except (TypeError, ValueError, KeyError) as e:
+        return f"Erro ao executar {tool.__name__}: {e}"
+    return result if isinstance(result, str) else json.dumps(result, ensure_ascii=False, default=str)
+
+
+class OllamaProvider:
+    """Modelos locais servidos pelo Ollama (``ollama serve``). Sem cota e sem internet;
+    a qualidade depende do modelo baixado (``ollama pull qwen2.5:14b``)."""
+
+    name = "ollama"
+
+    def __init__(self, model: str | None = None, host: str | None = None) -> None:
+        import ollama
+
+        self.model = model or os.getenv("OLLAMA_MODEL", DEFAULT_OLLAMA_MODEL)
+        self.host = host or os.getenv("OLLAMA_BASE_URL", DEFAULT_OLLAMA_URL)
+        self.client = ollama.Client(host=self.host)
+
+    def _chat(self, **kwargs):
+        import ollama
+
+        try:
+            return self.client.chat(model=self.model, stream=False, **kwargs)
+        except ConnectionError as e:
+            raise RuntimeError(
+                f"Ollama não está respondendo em {self.host}. Rode `ollama serve` (e "
+                f"`ollama pull {self.model}`) ou use LLM_PROVIDER=gemini|mock."
+            ) from e
+        except ollama.ResponseError as e:
+            if e.status_code == 404:
+                raise RuntimeError(f"Modelo {self.model!r} não encontrado. Rode `ollama pull {self.model}`.") from e
+            raise
+
+    def generate(self, system: str, prompt: str, *, json_output: bool = False, temperature: float = 0.3) -> str:
+        resp = self._chat(
+            messages=[{"role": "system", "content": system}, {"role": "user", "content": prompt}],
+            options={"temperature": temperature},
+            format="json" if json_output else None,
+        )
+        return resp.message.content or ""
+
+    def start_chat(self, system: str, tools: list[Callable]) -> ChatSession:
+        """Chat com chamada de ferramentas (funções Python), em laço até o modelo responder em texto."""
+        provider = self
+        by_name = {t.__name__: t for t in tools}
+        schemas = [_tool_schema(t) for t in tools] or None
+
+        class _Session:
+            def __init__(self) -> None:
+                self.messages: list[dict] = [{"role": "system", "content": system}]
+
+            def send(self, message: str) -> str:
+                self.messages.append({"role": "user", "content": message})
+                for _ in range(MAX_TOOL_ROUNDS):  # evita laço infinito de ferramentas
+                    msg = provider._chat(messages=self.messages, tools=schemas, options={"temperature": 0.2}).message
+                    calls = msg.tool_calls or []
+                    self.messages.append({
+                        "role": "assistant",
+                        "content": msg.content or "",
+                        **({"tool_calls": [{"function": {"name": c.function.name, "arguments": c.function.arguments}} for c in calls]} if calls else {}),
+                    })
+                    if not calls:
+                        return msg.content or ""
+                    for c in calls:
+                        tool = by_name.get(c.function.name)
+                        result = _call_tool(tool, c.function.arguments) if tool else f"Erro: ferramenta {c.function.name!r} não existe."
+                        self.messages.append({"role": "tool", "tool_name": c.function.name, "content": result})
+                return f"Não consegui concluir a resposta após {MAX_TOOL_ROUNDS} rodadas de chamadas de ferramentas."
+
+        return _Session()
+
 
 # ------------------------------------------------------------------------------ Mock
 
@@ -223,6 +341,8 @@ def get_provider(name: str | None = None) -> LLMProvider:
         name = "gemini" if (os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")) else "mock"
     if name == "gemini":
         return GeminiProvider()
+    if name == "ollama":
+        return OllamaProvider()
     if name == "mock":
         return MockProvider()
-    raise ValueError(f"LLM_PROVIDER desconhecido: {name!r} (use 'gemini' ou 'mock')")
+    raise ValueError(f"LLM_PROVIDER desconhecido: {name!r} (use 'gemini', 'ollama' ou 'mock')")

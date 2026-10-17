@@ -1,4 +1,8 @@
-"""Mapa interativo (Folium/Leaflet) das rotas otimizadas."""
+"""Mapa interativo (Folium/Leaflet) das rotas otimizadas.
+
+O trajeto de cada veículo é desenhado pelas ruas (OSRM, ver ``rotas.viz.roads``). Sem internet,
+ou com ``ROTAS_ROADS=off``, cai para linhas retas tracejadas.
+"""
 
 from __future__ import annotations
 
@@ -8,13 +12,20 @@ import folium
 
 from rotas.domain import Priority
 from rotas.solution import Solution, route_details
+from rotas.viz.roads import RoadPath, RoadRouter, default_router
+
+_AUTO = object()  # "escolha pelo ambiente" (ROTAS_ROADS / OSRM_URL)
 
 VEHICLE_COLORS = ["#1f77b4", "#2ca02c", "#9467bd", "#ff7f0e", "#8c564b", "#e377c2", "#17becf"]
 PRIORITY_COLORS = {"crítica": "red", "urgente": "orange", "regular": "green"}
 
 
-def route_map(solution: Solution, title: str | None = None) -> folium.Map:
+def route_map(solution: Solution, title: str | None = None, router: RoadRouter | None | object = _AUTO) -> folium.Map:
+    """``router=None`` força linhas retas; por padrão usa o OSRM configurado no ambiente."""
+    if router is _AUTO:
+        router = default_router()
     sc = solution.scenario
+    any_road = False
     details = route_details(sc, solution.evaluate())
     m = folium.Map(location=[sc.depot.lat, sc.depot.lon], zoom_start=11, tiles="OpenStreetMap")
 
@@ -28,12 +39,17 @@ def route_map(solution: Solution, title: str | None = None) -> folium.Map:
         if not route["usado"]:
             continue
         color = VEHICLE_COLORS[j % len(VEHICLE_COLORS)]
-        layer = folium.FeatureGroup(
-            name=f"{route['veiculo']} — {route['distancia_km']} km, {len(route['paradas'])} paradas"
-        )
         path = [(sc.depot.lat, sc.depot.lon)] + [(s["lat"], s["lon"]) for s in route["paradas"]]
         path.append((sc.depot.lat, sc.depot.lon))
-        folium.PolyLine(path, color=color, weight=4, opacity=0.8).add_to(layer)
+        road = router.route(path) if router else RoadPath(path, None, "reta")
+        any_road = any_road or road.is_road
+        name = f"{route['veiculo']} — {route['distancia_km']} km, {len(route['paradas'])} paradas"
+        if road.km:
+            name += f" (pelas ruas: {road.km} km)"
+        layer = folium.FeatureGroup(name=name)
+        folium.PolyLine(
+            road.points, color=color, weight=4, opacity=0.8, dash_array=None if road.is_road else "8 8"
+        ).add_to(layer)
         for s in route["paradas"]:
             popup = (
                 f"<b>{s['ordem']}. {s['destino']}</b><br>"
@@ -69,13 +85,22 @@ def route_map(solution: Solution, title: str | None = None) -> folium.Map:
         "<span style='color:red'>●</span> crítica &nbsp;"
         "<span style='color:orange'>●</span> urgente &nbsp;"
         "<span style='color:green'>●</span> regular<br>"
-        "Cor da linha = veículo · marcador grande = entrega crítica</div>"
+        "Cor da linha = veículo · marcador grande = entrega crítica<br>"
+        + (
+            "Linha cheia = trajeto pelas ruas (OSRM, ilustrativo). O km do título é o do otimizador "
+            "(Haversine × 1,3); o km \"pelas ruas\" é só para conferência."
+            if any_road
+            else "Linha tracejada = linha reta entre as paradas (trajeto pelas ruas indisponível)."
+        )
+        + "</div>"
     )
     m.get_root().html.add_child(folium.Element(legend))
     return m
 
 
-def save_route_map(solution: Solution, path: Path | str, title: str | None = None) -> Path:
+def save_route_map(
+    solution: Solution, path: Path | str, title: str | None = None, router: RoadRouter | None | object = _AUTO
+) -> Path:
     path = Path(path)
-    route_map(solution, title).save(str(path))
+    route_map(solution, title, router).save(str(path))
     return path
