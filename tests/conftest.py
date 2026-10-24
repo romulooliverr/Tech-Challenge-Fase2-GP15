@@ -3,6 +3,7 @@ import os
 import pytest
 
 os.environ["LLM_PROVIDER"] = "mock"  # testes nunca chamam a API real
+os.environ["ROTAS_ROADS"] = "off"  # nem a internet (OSRM) para desenhar ruas
 
 from rotas.scenario import generate_scenario  # noqa: E402
 

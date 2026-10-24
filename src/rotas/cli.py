@@ -9,6 +9,7 @@ Comandos:
   suggest        sugestões de melhoria a partir do histórico (LLM)
   chat           perguntas em linguagem natural sobre as rotas (LLM + ferramentas)
   llm-eval       avaliação da qualidade das instruções: prompt v0 (ingênuo) × v1
+  map            (re)gera mapas HTML com o trajeto pelas ruas, sem reotimizar nada
 """
 
 from __future__ import annotations
@@ -62,6 +63,26 @@ def cmd_solve(a) -> None:
     save_route_map(sol, a.out / "mapa.html")
     print(json.dumps(summarize(sc, res.best), indent=2, ensure_ascii=False))
     print(f"Solução e mapa salvos em {a.out}")
+
+
+def cmd_map(a) -> None:
+    from rotas.viz.maps import save_route_map
+
+    if a.all:  # os três mapas padrão de `rotas experiments`, a partir das soluções já salvas
+        jobs = [(BEST, RESULTS / "mapa_ag.html")]
+        for pattern, out in [("vizinho_mais_pr*.json", "mapa_vizinho_mais_proximo.html"),
+                             ("c*digo_base*.json", "mapa_codigo_base.html")]:  # '*' cobre os acentos
+            found = sorted((RESULTS / "solutions").glob(pattern))
+            if found:
+                jobs.append((found[0], RESULTS / out))
+    else:
+        jobs = [(a.solution, a.out or RESULTS / "mapa.html")]
+    for src, out in jobs:
+        if not Path(src).exists():
+            print(f"[pulado] {src} não existe")
+            continue
+        save_route_map(Solution.load(src), out)
+        print(f"mapa salvo em {out}")
 
 
 def cmd_simulate_week(a) -> None:
@@ -164,6 +185,12 @@ def main(argv: list[str] | None = None) -> None:
 
     p = sub.add_parser("experiments", add_help=False)
     p.set_defaults(fn=None)
+
+    p = sub.add_parser("map")
+    p.add_argument("--solution", type=Path, default=BEST)
+    p.add_argument("--out", type=Path, help="arquivo .html (padrão: results/mapa.html)")
+    p.add_argument("--all", action="store_true", help="regenera mapa_ag, mapa_vizinho_mais_proximo e mapa_codigo_base")
+    p.set_defaults(fn=cmd_map)
 
     p = sub.add_parser("simulate-week")
     p.add_argument("--days", type=int, default=7)
