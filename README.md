@@ -16,7 +16,7 @@ domiciliar. Ele combina:
 
 > 📄 Relatório técnico completo: [`docs/relatorio_tecnico.md`](docs/relatorio_tecnico.md) ·
 > Arquitetura: [`docs/arquitetura.md`](docs/arquitetura.md) ·
-> Roteiro do vídeo: [`docs/roteiro_video.md`](docs/roteiro_video.md)
+> Guia da interface: [`docs/manual_interface.pdf`](docs/manual_interface.pdf)
 
 ---
 
@@ -77,7 +77,7 @@ ingênuo inventou números, deixou paradas de fora e não seguiu uma estrutura.
 ├── scripts/scalability.py   # estudo de escalabilidade (20/40/80 entregas)
 ├── notebooks/demo.ipynb     # notebook de demonstração
 ├── results/                 # resultados, gráficos, mapas e textos gerados pela LLM
-└── docs/                    # relatório técnico, arquitetura, roteiro do vídeo
+└── docs/                    # relatório técnico, arquitetura, guia da interface
 ```
 
 ---
